@@ -17,6 +17,6 @@ public class TechStack extends Interest{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "techStack" )
     List<MemberTechStack> memberTechStacks = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "techStack")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "techStack", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Comment> comments = new ArrayList<>();
 }
