@@ -25,7 +25,7 @@ public class Post {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
     @Column(name = "LIKE")
