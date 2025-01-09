@@ -18,13 +18,22 @@ public class JwtAuthenticationFilter implements Filter {
         if(servletRequest instanceof HttpServletRequest request
                 && servletResponse instanceof HttpServletResponse response){
             String token = request.getHeader("Authorization");
+
+            //인증하지 않아도 사용 가능한 경로 처리하기
+            String requestURI = request.getRequestURI();
+            if(isNoNeedAuth(requestURI)){
+                filterChain.doFilter(request,response);
+                return;
+            }
+
+            //인증해야 사용 가능한 경로 처리하기
             if(token != null && !token.isEmpty()){
                 try{
                     String username = jwtUtil.validateToken(token.replace("Bearer",""));
                     request.setAttribute("username",username);
                 } catch (SecurityException e){
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    response.getWriter().write("Invalid or expired JWT token");
+                    response.getWriter().write("유효하지 않거나 만료된 토큰입니다.");
                     return;
                 }
             }
@@ -33,5 +42,12 @@ public class JwtAuthenticationFilter implements Filter {
         }
 
 
+    }
+
+    private boolean isNoNeedAuth(String requestURI) {
+        if(requestURI.startsWith("/chungbung")){
+            return true;
+        }
+        return false;
     }
 }
