@@ -18,6 +18,6 @@ public abstract class Interest {
     private String name;
 
     @Column(name = "INTEREST_RATE")
-    private Integer rate;
+    private Long rate;
 
 }

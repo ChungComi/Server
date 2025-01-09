@@ -1,6 +1,8 @@
 package ChungComiServer.dot.core.entity;
 
+import ChungComiServer.dot.core.entity.interest.Company;
 import ChungComiServer.dot.core.entity.interest.Interest;
+import ChungComiServer.dot.core.entity.interest.TechStack;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -20,22 +22,22 @@ public class Comment {
     private String content;
 
     @Column(name = "LIKE")
-    private Integer like;
+    private Long like;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POST_ID")
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "INTEREST_ID")
-    private Interest company;
+    @JoinColumn(name = "COMPANY_ID", referencedColumnName = "INTEREST_ID")
+    private Company company;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "INTEREST_ID")
-    private Interest techStack;
+    @JoinColumn(name = "TECHSTACK_ID", referencedColumnName = "INTEREST_ID")
+    private TechStack techStack;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "COMMENT_ID")
+    @JoinColumn(name = "PARENT_ID")
     private Comment parent;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")

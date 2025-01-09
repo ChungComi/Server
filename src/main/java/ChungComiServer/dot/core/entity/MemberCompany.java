@@ -22,6 +22,6 @@ public class MemberCompany {
     private Company company;
 
     @Column(name = "PREFERENCE")
-    private Integer preference;
+    private Long preference;
 
 }

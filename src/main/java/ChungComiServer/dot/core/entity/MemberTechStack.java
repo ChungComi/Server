@@ -22,5 +22,5 @@ public class MemberTechStack {
     private TechStack techStack;
 
     @Column(name = "PREFERENCE")
-    private Integer preference;
+    private Long preference;
 }

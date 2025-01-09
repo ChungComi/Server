@@ -29,8 +29,8 @@ public class Post {
     private List<Comment> comments = new ArrayList<>();
 
     @Column(name = "LIKE")
-    private Integer like;
+    private Long like;
 
     @Column(name = "VIEWS")
-    private Integer views;
+    private Long views;
 }
