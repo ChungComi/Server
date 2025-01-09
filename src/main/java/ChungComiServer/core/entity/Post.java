@@ -3,6 +3,7 @@ package ChungComiServer.core.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +26,7 @@ public class Post {
     private Member member;
 
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     @Column(name = "LIKE")
     private Integer like;

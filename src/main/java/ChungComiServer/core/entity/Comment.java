@@ -4,6 +4,7 @@ import ChungComiServer.core.entity.interest.Interest;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,5 +39,5 @@ public class Comment {
     private Comment parent;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-    private List<Comment> child;
+    private List<Comment> child = new ArrayList<>();
 }

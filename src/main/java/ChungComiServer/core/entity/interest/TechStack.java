@@ -6,6 +6,7 @@ import ChungComiServer.core.entity.MemberTechStack;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +15,8 @@ import java.util.List;
 public class TechStack extends Interest{
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "techStack" )
-    List<MemberTechStack> memberTechStacks;
+    List<MemberTechStack> memberTechStacks = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "techStack")
-    List<Comment> comments;
+    List<Comment> comments = new ArrayList<>();
 }

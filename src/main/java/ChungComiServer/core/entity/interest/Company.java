@@ -8,6 +8,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,8 +17,8 @@ import java.util.List;
 public class Company extends Interest{
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
-    private List<MemberCompany> memberCompanies;
+    private List<MemberCompany> memberCompanies = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 }

@@ -3,6 +3,7 @@ package ChungComiServer.core.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,5 +19,5 @@ public class School {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
-    private List<Member> members;
+    private List<Member> members = new ArrayList<>();
 }
