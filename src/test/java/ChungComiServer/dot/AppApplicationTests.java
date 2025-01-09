@@ -1,4 +1,4 @@
-package ChungComiServer.core;
+package ChungComiServer.dot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

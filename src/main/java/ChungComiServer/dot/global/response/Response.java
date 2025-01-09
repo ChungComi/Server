@@ -1,8 +1,7 @@
-package ChungComiServer.global.response;
+package ChungComiServer.dot.global.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 @AllArgsConstructor

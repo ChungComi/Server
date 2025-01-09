@@ -1,12 +1,7 @@
-package ChungComiServer.core.entity.interest;
+package ChungComiServer.dot.core.entity.interest;
 
-import ChungComiServer.core.entity.Comment;
-import ChungComiServer.core.entity.MemberCompany;
 import jakarta.persistence.*;
 import lombok.Getter;
-
-import javax.lang.model.element.Name;
-import java.util.List;
 
 @Entity
 @Getter

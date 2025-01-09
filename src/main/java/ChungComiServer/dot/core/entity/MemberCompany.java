@@ -1,17 +1,16 @@
-package ChungComiServer.core.entity;
+package ChungComiServer.dot.core.entity;
 
-import ChungComiServer.core.entity.interest.Interest;
-import ChungComiServer.core.entity.interest.TechStack;
+import ChungComiServer.dot.core.entity.interest.Company;
 import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
 @Getter
-@Table(name = "MEMBERTECHSTACK")
-public class MemberTechStack {
+@Table(name = "MEMBERCOMPANY")
+public class MemberCompany {
 
     @Id @GeneratedValue
-    @Column(name = "MEMBERTECHSTACK_ID")
+    @Column(name = "MEMBERCOMPANY_ID")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -19,9 +18,10 @@ public class MemberTechStack {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TECHSTACK_ID")
-    private TechStack techStack;
+    @JoinColumn(name = "INTEREST_ID")
+    private Company company;
 
     @Column(name = "PREFERENCE")
     private Integer preference;
+
 }
