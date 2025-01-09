@@ -13,9 +13,9 @@ import java.util.List;
 @Table(name = "TECHSTACK")
 public class TechStack extends Interest{
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "techStack" )
     List<MemberTechStack> memberTechStacks;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "techStack")
     List<Comment> comments;
 }

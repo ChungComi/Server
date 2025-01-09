@@ -17,6 +17,6 @@ public class School {
     @Column(name = "SCHOOL_NAME")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
     private List<Member> members;
 }

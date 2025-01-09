@@ -37,6 +37,6 @@ public class Comment {
     @JoinColumn(name = "COMMENT_ID")
     private Comment parent;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
     private List<Comment> child;
 }

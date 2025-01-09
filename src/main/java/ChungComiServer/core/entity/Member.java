@@ -23,13 +23,13 @@ public class Member {
     @Column(name = "LOGIN_PW")
     String loginPw;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member" )
     List<Post> posts;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     List<MemberCompany> memberCompanies;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     List<MemberTechStack> memberTechStacks;
 
     @ManyToOne(fetch = FetchType.LAZY)
