@@ -1,4 +1,4 @@
-package ChungComiServer.core.entity;
+package ChungComiServer.dot.core.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

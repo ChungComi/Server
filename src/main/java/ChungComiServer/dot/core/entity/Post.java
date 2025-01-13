@@ -1,4 +1,4 @@
-package ChungComiServer.core.entity;
+package ChungComiServer.dot.core.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,9 +28,9 @@ public class Post {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @Column(name = "LIKE")
-    private Integer like;
+    @Column(name = "LIKES")
+    private Long likes;
 
     @Column(name = "VIEWS")
-    private Integer views;
+    private Long views;
 }

@@ -1,6 +1,6 @@
-package ChungComiServer.core.entity;
+package ChungComiServer.dot.core.entity;
 
-import ChungComiServer.core.entity.interest.Company;
+import ChungComiServer.dot.core.entity.interest.Company;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -22,6 +22,6 @@ public class MemberCompany {
     private Company company;
 
     @Column(name = "PREFERENCE")
-    private Integer preference;
+    private Long preference;
 
 }

@@ -1,7 +1,6 @@
-package ChungComiServer.core.entity;
+package ChungComiServer.dot.core.entity;
 
-import ChungComiServer.core.entity.interest.Interest;
-import ChungComiServer.core.entity.interest.TechStack;
+import ChungComiServer.dot.core.entity.interest.TechStack;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -23,5 +22,5 @@ public class MemberTechStack {
     private TechStack techStack;
 
     @Column(name = "PREFERENCE")
-    private Integer preference;
+    private Long preference;
 }

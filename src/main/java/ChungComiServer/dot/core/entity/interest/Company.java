@@ -1,7 +1,7 @@
-package ChungComiServer.core.entity.interest;
+package ChungComiServer.dot.core.entity.interest;
 
-import ChungComiServer.core.entity.Comment;
-import ChungComiServer.core.entity.MemberCompany;
+import ChungComiServer.dot.core.entity.Comment;
+import ChungComiServer.dot.core.entity.MemberCompany;
 import jakarta.persistence.*;
 import lombok.Getter;
 
