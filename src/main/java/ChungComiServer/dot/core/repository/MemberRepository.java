@@ -27,7 +27,7 @@ public class MemberRepository {
     }
 
     public List<Member> findAll() {
-        return em.createQuery("select m from Member m", Member.class)
+        return em.createQuery("select m from Member m join fetch m.memberCompanies, m.memberTechStacks, m.posts", Member.class)
                 .getResultList();
     }
 
@@ -36,7 +36,7 @@ public class MemberRepository {
     }
 
     public List<Member> findByName(String memberName) {
-        return em.createQuery("select m from Member m where m.name =: name",Member.class)
+        return em.createQuery("select m from Member m join fetch m.memberCompanies, m.memberTechStacks, m.posts where m.name =: name",Member.class)
                 .setParameter("name",memberName)
                 .getResultList();
     }
