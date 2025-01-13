@@ -45,7 +45,7 @@ public class JwtAuthenticationFilter implements Filter {
     }
 
     private boolean isNoNeedAuth(String requestURI) {
-        if(requestURI.startsWith("/chungbung")){
+        if(requestURI.startsWith("/auth")){
             return true;
         }
         return false;
