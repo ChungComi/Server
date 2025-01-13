@@ -28,8 +28,8 @@ public class Post {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @Column(name = "LIKE")
-    private Long like;
+    @Column(name = "LIKES")
+    private Long likes;
 
     @Column(name = "VIEWS")
     private Long views;

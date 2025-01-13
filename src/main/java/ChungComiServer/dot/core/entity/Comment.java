@@ -21,8 +21,8 @@ public class Comment {
     @Column(name = "CONTENT")
     private String content;
 
-    @Column(name = "LIKE")
-    private Long like;
+    @Column(name = "LIKES")
+    private Long likes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POST_ID")
