@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class LoginDTO {
+    public LoginDTO(){}
     @NotEmpty(message = "id must be filled")
     private String loginID;
     @NotEmpty(message = "pw must be filled")

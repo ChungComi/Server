@@ -13,6 +13,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class RegisterDTO {
+
+    public RegisterDTO(){}
+
     @NotEmpty(message = "name must be filled")
     String name;
     @NotEmpty(message = "id must be filled")
