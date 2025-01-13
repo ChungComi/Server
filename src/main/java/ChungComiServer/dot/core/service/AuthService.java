@@ -33,7 +33,7 @@ public class AuthService {
     public Long register(String name, String loginId, String loginPw,
                            List<MemberCompany> memberCompanies, List<MemberTechStack> memberTechStacks) throws InvalidPropertiesFormatException {
         String encryptedLoginPw = passwordUtil.encrypt(loginPw);
-        Member member = new Member(name,loginPw,encryptedLoginPw,memberCompanies,memberTechStacks);
+        Member member = new Member(name,loginId,encryptedLoginPw,memberCompanies,memberTechStacks);
         return memberRepository.save(member);
     }
 }
