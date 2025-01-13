@@ -1,0 +1,42 @@
+package ChungComiServer.dot.core.service;
+
+import ChungComiServer.dot.core.dto.ResponseMemberDTO;
+import ChungComiServer.dot.core.entity.Member;
+import ChungComiServer.dot.core.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Stream;
+
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class MemberService {
+
+    private final MemberRepository memberRepository;
+
+    public List<ResponseMemberDTO> findAll() {
+        List<Member> all = memberRepository.findAll();
+        if(all.isEmpty())
+            throw new NoSuchElementException("회원 존재 x");
+        return all.stream().map(ResponseMemberDTO::new).toList();
+    }
+
+    public ResponseMemberDTO findById(String memberId) {
+        Member foundMember = memberRepository.findById(memberId);
+        if(foundMember == null){
+            throw new NoSuchElementException("회원 존재 x");
+        }
+        return new ResponseMemberDTO(foundMember);
+    }
+
+    public List<ResponseMemberDTO> findByName(String memberName) {
+        List<Member> members = memberRepository.findByName(memberName);
+        if(members.isEmpty())
+            throw new NoSuchElementException("회원 존재 x");
+        return members.stream().map(ResponseMemberDTO::new).toList();
+    }
+}
