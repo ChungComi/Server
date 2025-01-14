@@ -11,7 +11,6 @@ import java.io.IOException;
 
 @Slf4j
 @RequiredArgsConstructor
-
 public class JwtAuthenticationFilter implements Filter {
 
     private final JwtUtil jwtUtil;
@@ -34,16 +33,14 @@ public class JwtAuthenticationFilter implements Filter {
             log.info("로그인 필터 인증 해야되면 호출되는 부분 uri ={}, token ={}",requestURI,token);
             if(token != null && !token.isEmpty()){
                 try{
-                    log.info("dfasdf");
-                    String validateToken = jwtUtil.validateToken(token.replace("Bearer ","").trim());
-                    request.setAttribute("validateToken",validateToken);
+                    String tokenSubject = jwtUtil.validateToken(token.replace("Bearer ",""));
+                    request.setAttribute("tokenSubject",tokenSubject);
                 } catch (SecurityException e){
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     response.getWriter().write("유효하지 않거나 만료된 토큰입니다.");
-                    return;
                 }
             }
-            log.info("request.getAttribute('validateToken')={}",request.getAttribute("validateToken"));
+            log.info("request.getAttribute('tokenSubject')={}",request.getAttribute("tokenSubject"));
             filterChain.doFilter(request,response);
         }
     }

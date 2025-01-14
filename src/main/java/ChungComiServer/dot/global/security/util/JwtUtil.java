@@ -35,13 +35,12 @@ public class JwtUtil {
 
     public String validateToken(String token) {
         try{
-            log.info("ieojwe");
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
-            log.info("Token successfully validated: {}", claims.getSubject());
+            log.info("Token successfully validated, token's subject: {}", claims.getSubject());
             return claims.getSubject();
         }catch (JwtException | IllegalArgumentException e){
             throw new SecurityException("Invalid JWT token",e);

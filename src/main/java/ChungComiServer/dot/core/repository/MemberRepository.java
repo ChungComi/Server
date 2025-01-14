@@ -3,12 +3,14 @@ package ChungComiServer.dot.core.repository;
 import ChungComiServer.dot.core.entity.Member;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class MemberRepository {
 
     private final EntityManager em;
@@ -27,7 +29,7 @@ public class MemberRepository {
     }
 
     public List<Member> findAll() {
-        return em.createQuery("select m from Member m join fetch m.memberCompanies, m.memberTechStacks, m.posts", Member.class)
+        return em.createQuery("select m from Member m", Member.class)
                 .getResultList();
     }
 
@@ -36,7 +38,7 @@ public class MemberRepository {
     }
 
     public List<Member> findByName(String memberName) {
-        return em.createQuery("select m from Member m join fetch m.memberCompanies, m.memberTechStacks, m.posts where m.name =: name",Member.class)
+        return em.createQuery("select m from Member m where m.name =: name",Member.class)
                 .setParameter("name",memberName)
                 .getResultList();
     }
