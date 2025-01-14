@@ -11,7 +11,7 @@ import lombok.Setter;
 public class LoginDTO {
     public LoginDTO(){}
     @NotEmpty(message = "id must be filled")
-    private String loginID;
+    private String loginId;
     @NotEmpty(message = "pw must be filled")
-    private String loginPW;
+    private String loginPw;
 }
