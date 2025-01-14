@@ -1,4 +1,4 @@
-package ChungComiServer.dot.core.dto;
+package ChungComiServer.dot.core.dto.auth;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
