@@ -28,18 +28,27 @@ public class MemberRepository {
         return member.getId();
     }
 
+    /** @Param: x
+     * @Return: 모든 회원 객체 **/
     public List<Member> findAll() {
-        return em.createQuery("select m from Member m", Member.class)
+        return em.createQuery("select m from Member m join fetch m.school", Member.class)
                 .getResultList();
     }
 
+    /** @Param: 회원 ID
+     * @Return: 회원 객체 **/
     public Member findById(String memberId) {
         return em.find(Member.class,memberId);
     }
 
+    /** @Param: 회원 이름
+     * @Return: 해당 이름을 가진 회원객체 list
+     * */
     public List<Member> findByName(String memberName) {
-        return em.createQuery("select m from Member m where m.name =: name",Member.class)
+        return em.createQuery("select m from Member m join fetch m.school where m.name =: name",Member.class)
                 .setParameter("name",memberName)
                 .getResultList();
     }
+
+
 }

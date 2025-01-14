@@ -23,6 +23,27 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
+    /**
+     * 여러 사람 정보
+     * @Param: x
+     * @Return:
+     *     List[
+     *     {
+     *     String name;
+     *
+     *     List<MemberCompanyDTO> memberCompanies{
+     *     Long preference;
+     *     String companyName;}
+     *
+     *     List<MemberTechStackDTO> memberTechStacks{
+     *     Long preference;
+     *     String techStackName;}
+     *
+     *     SchoolDTO school{
+     *     String name};
+     *     }
+     *     ]
+     */
     @GetMapping("")
     public Response getAllMembers(){
         try{
@@ -33,6 +54,11 @@ public class MemberController {
         }
     }
 
+    /**
+     * 내 정보
+     * @param memberId
+     * @Return: { String name; List memberCompanies{ Long preference; String companyName;} List memberTechStacks{ Long preference; String techStackName;} SchoolDTO school{ String name}; }
+     */
     @GetMapping("/{memberId}")
     public Response getMemberById(@PathVariable String memberId){
         try{
@@ -43,6 +69,11 @@ public class MemberController {
         }
     }
 
+    /**
+     * 내 정보
+     * @param memberName
+     * @return { String name; List memberCompanies{ Long preference; String companyName;} List memberTechStacks{ Long preference; String techStackName;} SchoolDTO school{ String name}; }
+     */
     @GetMapping("/{memberName}")
     public Response getMemberByName(@PathVariable String memberName){
         try{

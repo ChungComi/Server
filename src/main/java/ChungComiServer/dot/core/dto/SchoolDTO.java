@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class SchoolDTO {
-    String name;
+    private String name;
     public SchoolDTO(){}
 
     public SchoolDTO(String name){
