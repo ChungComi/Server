@@ -11,6 +11,7 @@ import java.io.IOException;
 
 @Slf4j
 @RequiredArgsConstructor
+
 public class JwtAuthenticationFilter implements Filter {
 
     private final JwtUtil jwtUtil;
