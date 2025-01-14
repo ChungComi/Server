@@ -1,4 +1,4 @@
-package ChungComiServer.dot.core.dto.api;
+package ChungComiServer.dot.api.dto;
 
 import lombok.Getter;
 

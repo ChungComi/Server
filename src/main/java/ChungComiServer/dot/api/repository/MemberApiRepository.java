@@ -1,4 +1,4 @@
-package ChungComiServer.dot.core.repository.api;
+package ChungComiServer.dot.api.repository;
 
 import ChungComiServer.dot.core.entity.Member;
 import jakarta.persistence.EntityManager;

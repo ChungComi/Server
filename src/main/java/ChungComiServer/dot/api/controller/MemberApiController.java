@@ -1,8 +1,7 @@
-package ChungComiServer.dot.core.controller.api;
+package ChungComiServer.dot.api.controller;
 
-import ChungComiServer.dot.core.controller.MemberController;
-import ChungComiServer.dot.core.dto.api.GetMemberCompaniesDTO;
-import ChungComiServer.dot.core.service.api.MemberApiService;
+import ChungComiServer.dot.api.dto.GetMemberCompaniesDTO;
+import ChungComiServer.dot.api.service.MemberApiService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
 import lombok.RequiredArgsConstructor;
