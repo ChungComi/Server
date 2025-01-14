@@ -1,7 +1,5 @@
-package ChungComiServer.dot.core.dto.api;
+package ChungComiServer.dot.api.dto;
 
-import ChungComiServer.dot.core.dto.MemberCompanyDTO;
-import ChungComiServer.dot.core.entity.Comment;
 import ChungComiServer.dot.core.entity.Member;
 import lombok.Getter;
 

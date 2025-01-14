@@ -1,8 +1,8 @@
-package ChungComiServer.dot.core.service.api;
+package ChungComiServer.dot.api.service;
 
-import ChungComiServer.dot.core.dto.api.GetMemberCompaniesDTO;
+import ChungComiServer.dot.api.dto.GetMemberCompaniesDTO;
 import ChungComiServer.dot.core.entity.Member;
-import ChungComiServer.dot.core.repository.api.MemberApiRepository;
+import ChungComiServer.dot.api.repository.MemberApiRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
