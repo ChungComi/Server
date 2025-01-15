@@ -1,7 +1,9 @@
 package ChungComiServer.dot.core.controller;
 
+import ChungComiServer.dot.core.dto.interest.ModifyInterestDTO;
 import ChungComiServer.dot.core.dto.interest.RegisterInterestDTO;
 import ChungComiServer.dot.core.dto.interest.ResponseInterestDTO;
+import ChungComiServer.dot.core.entity.interest.Company;
 import ChungComiServer.dot.core.service.CompanyService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
@@ -59,6 +61,20 @@ CompanyController {
                 return Response.failure(new ErrorCode(result.getFieldError().toString()));
             Long companyId = companyService.register(registerCompanyDTO.getName(),registerCompanyDTO.getDescription());
             return Response.success(companyId);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @PutMapping("/{companyId}")
+    public Response modifyCompanyInfo(@PathVariable String companyId,
+            @RequestBody @Valid ModifyInterestDTO modifyInterestDTO,BindingResult result){
+        try{
+            if(result.hasErrors())
+                return Response.failure(new ErrorCode(result.getFieldError().toString()));
+            ResponseInterestDTO company = companyService.modifyCompanyInfo(companyId,modifyInterestDTO.getName()
+                    ,modifyInterestDTO.getDescription());
+            return Response.success();
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }

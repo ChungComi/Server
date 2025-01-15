@@ -52,4 +52,15 @@ public class CompanyService {
             throw new RuntimeException("기업 저장 실패");
         return companyId;
     }
+
+    @Transactional
+    public ResponseInterestDTO modifyCompanyInfo(String StringCompanyId, String name, String description) {
+            Long companyId = Long.valueOf(StringCompanyId);
+            Company company = companyRepository.findById(companyId);
+            if(company == null)
+                throw new NoSuchElementException("해당 기업이 존재하지 않습니다.");
+            company.modifyCompanyInfo(name,description);
+            return new ResponseInterestDTO(company);
+    }
+
 }

@@ -27,4 +27,10 @@ public class Company extends Interest{
         this.name = companyName;
         this.description = description;
     }
+
+    /** 기업 정보 수정 메서드 **/
+    public void modifyCompanyInfo(String name,String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
