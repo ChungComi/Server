@@ -1,4 +1,4 @@
-package ChungComiServer.dot.core.dto.member;
+package ChungComiServer.dot.core.dto.school;
 
 import lombok.Getter;
 
