@@ -1,4 +1,4 @@
-package ChungComiServer.dot.core.dto.company;
+package ChungComiServer.dot.core.dto.interest;
 
 import ChungComiServer.dot.core.entity.Comment;
 import lombok.Getter;
