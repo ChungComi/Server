@@ -20,4 +20,7 @@ public abstract class Interest {
     @Column(name = "INTEREST_RATE")
     protected Long rate;
 
+    @Column(name = "DESCRIPTION")
+    protected String description;
+
 }

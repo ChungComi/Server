@@ -9,4 +9,6 @@ import lombok.Setter;
 public class RegisterInterestDTO {
     @NotEmpty
     private String name;
+    @NotEmpty
+    private String description;
 }
