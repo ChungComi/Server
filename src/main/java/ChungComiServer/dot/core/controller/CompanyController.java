@@ -74,7 +74,7 @@ CompanyController {
                 return Response.failure(new ErrorCode(result.getFieldError().toString()));
             ResponseInterestDTO company = companyService.modifyCompanyInfo(companyId,modifyInterestDTO.getName()
                     ,modifyInterestDTO.getDescription());
-            return Response.success();
+            return Response.success(company);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }

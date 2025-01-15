@@ -23,4 +23,9 @@ public abstract class Interest {
     @Column(name = "DESCRIPTION")
     protected String description;
 
+    /** 정보 수정 메서드 **/
+    public void modifyCompanyInfo(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

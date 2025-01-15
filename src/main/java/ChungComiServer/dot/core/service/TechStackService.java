@@ -44,14 +44,13 @@ public class TechStackService {
         return techStacks.stream().map(ResponseInterestDTO::new).toList();
     }
 
-//    @Transactional
-//    public void modifyTechInfo(String stringTechStackId, String techStackName) {
-//        if(stringTechStackId!=null){
-//            Long techStackId = Long.valueOf(stringTechStackId);
-//            TechStack techStack = techStackRepository.findById(techStackId);
-//
-//        }else{
-//
-//        }
-//    }
+    @Transactional
+    public ResponseInterestDTO modifyTechInfo(String stringTechStackId, String name, String description) {
+        Long techStackId = Long.valueOf(stringTechStackId);
+        TechStack techStack = techStackRepository.findById(techStackId);
+        if(techStack == null)
+            throw new NoSuchElementException("해당 기술 스택이 존재하지 않습니다.");
+        techStack.modifyCompanyInfo(name,description);
+        return new ResponseInterestDTO(techStack);
+    }
 }
