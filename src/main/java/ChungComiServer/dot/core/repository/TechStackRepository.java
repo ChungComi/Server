@@ -19,4 +19,15 @@ public class TechStackRepository {
         return em.createQuery("select t from TechStack t", TechStack.class)
                 .getResultList();
     }
+
+    public TechStack findById(Long techStackId) {
+        return em.find(TechStack.class,techStackId);
+    }
+
+    public List<TechStack> findByName(String techStackName) {
+        return em.createQuery("select t from TechStack t where t.name =: techStackName",TechStack.class)
+                .setParameter("techStackName",techStackName)
+                .getResultList();
+    }
+
 }

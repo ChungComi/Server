@@ -6,9 +6,7 @@ import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,4 +29,30 @@ public class TechStackController {
     }
 
     @GetMapping("/{tech-stackId}")
+    public Response getTechStackById(@PathVariable("tech-stackId")String techStackId){
+        try{
+            ResponseInterestDTO techStackDTO = techStackService.findById(techStackId);
+            return Response.success(techStackDTO);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @GetMapping("/{tech-stackName}")
+    public Response getTechStackByName(@PathVariable("tech-stackName")String techStackName){
+        try{
+            List<ResponseInterestDTO> techStackDTOs = techStackService.findByName(techStackName);
+            return Response.success(techStackDTOs);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+//    @PutMapping({"/{tech-stackId}","/{tech-stackName}"})
+//    public Response modifyTechInfo(@PathVariable(value = "tech-stackId", required = false)String techStackId
+//            ,@PathVariable(value = "tech-stackName", required = false)String techStackName){
+//        try{
+//            techStackService.modifyTechInfo(techStackId,techStackName);
+//        }
+//    }
 }
