@@ -18,4 +18,12 @@ public class Company extends Interest{
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    /** 기본 생성자 메서드 **/
+    public Company(){}
+
+    /** 기업 등록 생성자 메서드 **/
+    public Company(String companyName){
+        this.name = companyName;
+    }
 }

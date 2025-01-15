@@ -1,6 +1,5 @@
-package ChungComiServer.dot.core.dto;
+package ChungComiServer.dot.core.dto.member;
 
-import ChungComiServer.dot.core.entity.interest.Company;
 import lombok.Getter;
 
 @Getter

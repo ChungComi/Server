@@ -1,8 +1,7 @@
-package ChungComiServer.dot.core.dto;
+package ChungComiServer.dot.core.dto.auth;
 
 import ChungComiServer.dot.core.entity.MemberCompany;
 import ChungComiServer.dot.core.entity.MemberTechStack;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,6 @@
-package ChungComiServer.dot.core.dto;
+package ChungComiServer.dot.core.dto.member;
 
 import ChungComiServer.dot.core.entity.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.ArrayList;

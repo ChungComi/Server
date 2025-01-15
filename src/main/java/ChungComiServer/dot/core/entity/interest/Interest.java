@@ -15,9 +15,9 @@ public abstract class Interest {
     private Long id;
 
     @Column(name = "INTEREST_NAME")
-    private String name;
+    protected String name;
 
     @Column(name = "INTEREST_RATE")
-    private Long rate;
+    protected Long rate;
 
 }

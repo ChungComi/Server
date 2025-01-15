@@ -1,12 +1,9 @@
 package ChungComiServer.dot.core.controller;
 
-import ChungComiServer.dot.core.dto.ResponseMemberDTO;
-import ChungComiServer.dot.core.entity.Member;
-import ChungComiServer.dot.core.repository.MemberRepository;
+import ChungComiServer.dot.core.dto.member.ResponseMemberDTO;
 import ChungComiServer.dot.core.service.MemberService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
