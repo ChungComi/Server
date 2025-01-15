@@ -17,7 +17,8 @@ public class CompanyRepository {
     private final EntityManager em;
 
     public List<Company> findAll() {
-        return em.createQuery("select c from Company c", Company.class)
+        return em.createQuery("select c from Company c" +
+                        " join fetch c.comments", Company.class)
                 .getResultList();
     }
 
@@ -26,7 +27,9 @@ public class CompanyRepository {
     }
 
     public List<Company> findByName(String companyName) {
-        return em.createQuery("select c from Company c where c.name =: companyName", Company.class)
+        return em.createQuery("select c from Company c" +
+                        " join fetch c.comments" +
+                        " where c.name =: companyName", Company.class)
                 .setParameter("companyName",companyName)
                 .getResultList();
     }

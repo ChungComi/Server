@@ -45,8 +45,8 @@ public class CompanyService {
     }
 
     @Transactional
-    public Long register(String companyName) {
-        Interest company = new Company(companyName);
+    public Long register(String companyName,String companyDescription) {
+        Interest company = new Company(companyName,companyDescription);
         Long companyId = companyRepository.save(company);
         if(companyId == null)
             throw new RuntimeException("기업 저장 실패");

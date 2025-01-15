@@ -23,7 +23,8 @@ public class Company extends Interest{
     public Company(){}
 
     /** 기업 등록 생성자 메서드 **/
-    public Company(String companyName){
+    public Company(String companyName, String description){
         this.name = companyName;
+        this.description = description;
     }
 }

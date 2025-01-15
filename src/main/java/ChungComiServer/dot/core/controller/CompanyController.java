@@ -57,7 +57,7 @@ CompanyController {
         try {
             if (result.hasErrors())
                 return Response.failure(new ErrorCode(result.getFieldError().toString()));
-            Long companyId = companyService.register(registerCompanyDTO.getName());
+            Long companyId = companyService.register(registerCompanyDTO.getName(),registerCompanyDTO.getDescription());
             return Response.success(companyId);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
