@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.dto.interest;
 
+import ChungComiServer.dot.core.dto.comment.CommentDTO;
 import ChungComiServer.dot.core.entity.interest.Company;
 import ChungComiServer.dot.core.entity.interest.TechStack;
 import lombok.Getter;
