@@ -16,7 +16,8 @@ public class TechStackRepository {
     private final EntityManager em;
 
     public List<TechStack> findAll() {
-        return em.createQuery("select t from TechStack t", TechStack.class)
+        return em.createQuery("select t from TechStack t" +
+                        " join fetch t.comments", TechStack.class)
                 .getResultList();
     }
 
@@ -25,7 +26,9 @@ public class TechStackRepository {
     }
 
     public List<TechStack> findByName(String techStackName) {
-        return em.createQuery("select t from TechStack t where t.name =: techStackName",TechStack.class)
+        return em.createQuery("select t from TechStack t" +
+                        " join fetch t.comments" +
+                        " where t.name =: techStackName",TechStack.class)
                 .setParameter("techStackName",techStackName)
                 .getResultList();
     }
