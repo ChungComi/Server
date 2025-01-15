@@ -1,6 +1,6 @@
 package ChungComiServer.dot.core.service;
 
-import ChungComiServer.dot.core.dto.ResponseMemberDTO;
+import ChungComiServer.dot.core.dto.member.ResponseMemberDTO;
 import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor

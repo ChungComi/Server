@@ -1,7 +1,7 @@
 package ChungComiServer.dot.core.controller;
 
-import ChungComiServer.dot.core.dto.LoginDTO;
-import ChungComiServer.dot.core.dto.RegisterDTO;
+import ChungComiServer.dot.core.dto.auth.LoginDTO;
+import ChungComiServer.dot.core.dto.auth.RegisterDTO;
 import ChungComiServer.dot.core.service.AuthService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
@@ -9,7 +9,6 @@ import ChungComiServer.dot.global.security.util.JwtUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
