@@ -1,4 +1,4 @@
-package ChungComiServer.dot.core.dto.company;
+package ChungComiServer.dot.core.dto.interest;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RegisterCompanyDTO {
+public class RegisterInterestDTO {
     @NotEmpty
     private String name;
 }
