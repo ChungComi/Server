@@ -33,4 +33,19 @@ public class Post {
 
     @Column(name = "VIEWS")
     private Long views;
+
+    /** 기본 생성자 **/
+    public Post(){}
+
+    /** 게시글 생성을 위한 생성자 **/
+    public Post(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
+
+    /** 게시글 수정을 위한 메서드 **/
+    public void modifyPost(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }
