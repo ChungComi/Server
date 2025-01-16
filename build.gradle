@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.1'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.asciidoctor.jvm.convert' version '2.4.0'// AsciiDoc 파일을 컨버팅하고 build 폴더에 복사하기 위한 플러그인
 }
 
 group = 'ChungComiServer'
@@ -11,6 +12,10 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+}
+
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
 }
 
 configurations {
@@ -34,6 +39,7 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	implementation "com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.10.0"
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -45,5 +51,11 @@ dependencies {
 }
 
 tasks.named('test') {
+	outputs.dir snippetsDir
 	useJUnitPlatform()
+}
+
+tasks.named('asciidoctor') {
+	inputs.dir snippetsDir
+	dependsOn test
 }
