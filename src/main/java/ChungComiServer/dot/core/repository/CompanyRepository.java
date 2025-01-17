@@ -18,7 +18,7 @@ public class CompanyRepository {
 
     public List<Company> findAll() {
         return em.createQuery("select c from Company c" +
-                        " join fetch c.comments", Company.class)
+                        " left join fetch c.comments", Company.class)
                 .getResultList();
     }
 
