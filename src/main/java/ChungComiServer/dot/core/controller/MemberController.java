@@ -25,20 +25,10 @@ public class MemberController {
      * @Param: x
      * @Return:
      *     List[
-     *     {
-     *     String name;
-     *
-     *     List<MemberCompanyDTO> memberCompanies{
-     *     Long preference;
-     *     String companyName;}
-     *
-     *     List<MemberTechStackDTO> memberTechStacks{
-     *     Long preference;
-     *     String techStackName;}
-     *
-     *     SchoolDTO school{
-     *     String name};
-     *     }
+     *     {String name;
+     *     List<MemberCompanyDTO> memberCompanies{Long preference, String companyName;}
+     *     List<MemberTechStackDTO> memberTechStacks{Long preference, String techStackName;}
+     *     SchoolDTO school{String name};}
      *     ]
      */
     @GetMapping("")

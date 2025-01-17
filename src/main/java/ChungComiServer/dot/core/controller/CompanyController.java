@@ -35,7 +35,7 @@ CompanyController {
     }
 
     @GetMapping("/{companyId}")
-    public Response getCompanyById(@PathVariable String companyId){
+    public Response getCompanyById(@PathVariable("companyId") String companyId){
         try{
             ResponseInterestDTO companyDTO = companyService.findById(companyId);
             return Response.success(companyDTO);
@@ -44,8 +44,8 @@ CompanyController {
         }
     }
 
-    @GetMapping("/{companyName}")
-    public Response getCompanyByName(@PathVariable String companyName){
+    @GetMapping("/name/{companyName}")
+    public Response getCompanyByName(@PathVariable("companyName") String companyName){
         try{
             List<ResponseInterestDTO> companyDTOs = companyService.findByName(companyName);
             return Response.success(companyDTOs);
@@ -67,7 +67,7 @@ CompanyController {
     }
 
     @PutMapping("/{companyId}")
-    public Response modifyCompanyInfo(@PathVariable String companyId,
+    public Response modifyCompanyInfo(@PathVariable("companyId") String companyId,
             @RequestBody @Valid ModifyInterestDTO modifyInterestDTO,BindingResult result){
         try{
             if(result.hasErrors())
