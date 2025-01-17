@@ -30,10 +30,9 @@ public class AuthService {
     }
 
     @Transactional
-    public Long register(String name, String loginId, String loginPw,
-                           List<MemberCompany> memberCompanies, List<MemberTechStack> memberTechStacks) throws InvalidPropertiesFormatException {
+    public Long register(String name, String loginId, String loginPw) throws InvalidPropertiesFormatException {
         String encryptedLoginPw = passwordUtil.encrypt(loginPw);
-        Member member = new Member(name,loginId,encryptedLoginPw,memberCompanies,memberTechStacks);
+        Member member = new Member(name,loginId,encryptedLoginPw);
         return memberRepository.save(member);
     }
 }

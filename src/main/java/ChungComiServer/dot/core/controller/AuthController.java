@@ -45,7 +45,7 @@ public class AuthController {
                 StringBuilder stringBuilder = new StringBuilder();
                 result.getFieldErrors().forEach(fieldError -> stringBuilder.append(fieldError.getDefaultMessage()));
             }
-            Long registeredId = authService.register(registerDTO.getName(), registerDTO.getLoginId(), registerDTO.getLoginPw(), registerDTO.getMemberCompanies(), registerDTO.getMemberTechStacks());
+            Long registeredId = authService.register(registerDTO.getName(), registerDTO.getLoginId(), registerDTO.getLoginPw());
             return Response.success(registeredId);
         } catch (InvalidPropertiesFormatException e) {
             return Response.failure(new ErrorCode(e.getMessage()));
