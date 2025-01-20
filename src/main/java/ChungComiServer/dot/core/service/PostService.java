@@ -8,12 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostService {
 
@@ -42,18 +43,21 @@ public class PostService {
         return posts.stream().map(ResponsePostDTO::new).toList();
     }
 
-    public Long registerPost(String title, String content) {
+    @Transactional(readOnly = false)
+    public Long registerPost(String title, String content) throws InvalidPropertiesFormatException {
         Post post = new Post(title,content);
         return postRepository.registerPost(post);
     }
 
-    public ResponsePostDTO modifyPost(String stringPostId, String title, String content) {
+    @Transactional(readOnly = false)
+    public ResponsePostDTO modifyPost(String stringPostId, String title, String content) throws InvalidPropertiesFormatException {
         Long postId = Long.valueOf(stringPostId);
         Post post = postRepository.findById(postId);
         post.modifyPost(title,content);
         return new ResponsePostDTO(post);
     }
 
+    @Transactional(readOnly = false)
     public void deletePost(String stringPostId) {
         Long postId = Long.valueOf(stringPostId);
         postRepository.deletePost(postId);
