@@ -50,7 +50,7 @@ public class TechStackService {
         TechStack techStack = techStackRepository.findById(techStackId);
         if(techStack == null)
             throw new NoSuchElementException("해당 기술 스택이 존재하지 않습니다.");
-        techStack.modifyCompanyInfo(name,description);
+        techStack.modifyInfo(name,description);
         return new ResponseInterestDTO(techStack);
     }
 }

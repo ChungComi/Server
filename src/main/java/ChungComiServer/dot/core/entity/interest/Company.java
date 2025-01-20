@@ -30,5 +30,4 @@ public class Company extends Interest{
         this.description = description;
     }
 
-
 }

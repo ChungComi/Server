@@ -1,13 +1,16 @@
 package ChungComiServer.dot.core.entity.interest;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @Table(name = "INTEREST")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "DTYPE")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Interest {
 
     @Id @GeneratedValue
@@ -24,7 +27,7 @@ public abstract class Interest {
     protected String description;
 
     /** 정보 수정 메서드 **/
-    public void modifyCompanyInfo(String name, String description) {
+    public void modifyInfo(String name, String description) {
         this.name = name;
         this.description = description;
     }
