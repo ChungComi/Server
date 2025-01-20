@@ -63,4 +63,8 @@ public class Member {
         /* 비밀번호가 7자리보다 작을 경우 체크 */
         return loginPw.length() >= 7;
     }
+
+    public void changePwToEncrypt(String encryptedLoginPw) {
+        this.loginPw = encryptedLoginPw;
+    }
 }

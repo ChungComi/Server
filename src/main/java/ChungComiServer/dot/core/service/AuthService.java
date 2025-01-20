@@ -31,8 +31,9 @@ public class AuthService {
 
     @Transactional
     public Long register(String name, String loginId, String loginPw) throws InvalidPropertiesFormatException {
+        Member member = new Member(name,loginId,loginPw);
         String encryptedLoginPw = passwordUtil.encrypt(loginPw);
-        Member member = new Member(name,loginId,encryptedLoginPw);
+        member.changePwToEncrypt(encryptedLoginPw);
         return memberRepository.save(member);
     }
 }

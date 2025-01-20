@@ -25,7 +25,6 @@ import java.util.stream.Stream;
 @Transactional
 public class CompanyServiceTest extends ServiceTest {
 
-
     @Nested
     class 회사추가는{
         @DisplayName("잘못된 회사 추가하는 로직")

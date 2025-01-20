@@ -3,6 +3,7 @@ package ChungComiServer.dot.core;
 import ChungComiServer.dot.core.repository.CompanyRepository;
 import ChungComiServer.dot.core.repository.MemberRepository;
 import ChungComiServer.dot.core.repository.TechStackRepository;
+import ChungComiServer.dot.core.service.AuthService;
 import ChungComiServer.dot.core.service.CompanyService;
 import ChungComiServer.dot.core.service.MemberService;
 import ChungComiServer.dot.core.service.TechStackService;
@@ -31,5 +32,8 @@ public abstract class ServiceTest {
 
     @Autowired
     protected MemberRepository memberRepository;
+
+    @Autowired
+    protected AuthService authService;
 
 }
