@@ -34,7 +34,7 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public Response getPostById(@PathVariable String postId){
+    public Response getPostById(@PathVariable("postId") String postId){
         try{
             ResponsePostDTO postDTO = postService.findById(postId);
             return Response.success(postDTO);
@@ -43,8 +43,8 @@ public class PostController {
         }
     }
 
-    @GetMapping("/{postTitle}")
-    public Response getPostByTitle(@PathVariable String postTitle){
+    @GetMapping("/title/{postTitle}")
+    public Response getPostByTitle(@PathVariable("postTitle") String postTitle){
         try{
             List<ResponsePostDTO> postDTOs = postService.findByTitle(postTitle);
             return Response.success(postDTOs);
@@ -66,7 +66,7 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public Response modifyPost(@PathVariable String postId, @RequestBody ModifyPostDTO modifyPostDTO){
+    public Response modifyPost(@PathVariable("postId") String postId, @RequestBody ModifyPostDTO modifyPostDTO){
         try{
             ResponsePostDTO responsePostDTO = postService.modifyPost(postId, modifyPostDTO.getTitle(), modifyPostDTO.getContent());
             return Response.success(responsePostDTO);
@@ -76,7 +76,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{postId}")
-    public Response deletePost(@PathVariable String postId){
+    public Response deletePost(@PathVariable("postId") String postId){
         try{
             postService.deletePost(postId);
             return Response.success();

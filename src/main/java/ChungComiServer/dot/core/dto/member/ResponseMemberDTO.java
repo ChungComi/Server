@@ -37,6 +37,8 @@ public class ResponseMemberDTO {
         }
 
         /** 반환할 학교 DTO 설정 **/
-        this.school = new SchoolDTO(member.getSchool().getName());
+        if(member.getSchool() != null){
+            this.school = new SchoolDTO(member.getSchool().getName());
+        }
     }
 }

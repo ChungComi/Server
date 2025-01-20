@@ -21,8 +21,4 @@ public class RegisterDTO {
     String loginId;
     @NotEmpty(message = "pw must be filled")
     String loginPw;
-    @NotEmpty(message = "interested companies must be filled")
-    List<MemberCompany> memberCompanies;
-    @NotEmpty(message = "interested tech stacks must be filled")
-    List<MemberTechStack> memberTechStacks;
 }

@@ -59,7 +59,7 @@ public class CompanyService {
             Company company = companyRepository.findById(companyId);
             if(company == null)
                 throw new NoSuchElementException("해당 기업이 존재하지 않습니다.");
-            company.modifyCompanyInfo(name,description);
+            company.modifyInfo(name,description);
             return new ResponseInterestDTO(company);
     }
 

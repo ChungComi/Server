@@ -31,7 +31,7 @@ public class MemberRepository {
     /** @Param: x
      * @Return: 모든 회원 객체 **/
     public List<Member> findAll() {
-        return em.createQuery("select m from Member m join fetch m.school", Member.class)
+        return em.createQuery("select m from Member m left join fetch m.school", Member.class)
                 .getResultList();
     }
 
@@ -45,7 +45,7 @@ public class MemberRepository {
      * @Return: 해당 이름을 가진 회원객체 list
      * */
     public List<Member> findByName(String memberName) {
-        return em.createQuery("select m from Member m join fetch m.school where m.name =: name",Member.class)
+        return em.createQuery("select m from Member m left join fetch m.school where m.name =: name",Member.class)
                 .setParameter("name",memberName)
                 .getResultList();
     }

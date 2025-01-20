@@ -41,7 +41,7 @@ public class TechStackController {
         }
     }
 
-    @GetMapping("/{tech-stackName}")
+    @GetMapping("/name/{tech-stackName}")
     public Response getTechStackByName(@PathVariable("tech-stackName")String techStackName){
         try{
             List<ResponseInterestDTO> techStackDTOs = techStackService.findByName(techStackName);

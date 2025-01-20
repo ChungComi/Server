@@ -1,6 +1,7 @@
 package ChungComiServer.dot.core.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -47,15 +48,13 @@ public class Member {
     }
 
     /** 회원 가입 생성자 메서드 **/
-    public Member(String name, String loginId, String loginPw,
-                                 List<MemberCompany> memberCompanies, List<MemberTechStack> memberTechStacks) throws InvalidPropertiesFormatException {
+    @Builder
+    public Member(String name, String loginId, String loginPw) throws InvalidPropertiesFormatException {
         /* 회원가입 시 사용할 생성자 메서드 */
         if(!validatePw(loginPw)) throw new InvalidPropertiesFormatException("유효하지 않은 비밀번호");
         this.name = name;
         this.loginId = loginId;
         this.loginPw = loginPw;
-        this.memberCompanies = memberCompanies;
-        this.memberTechStacks = memberTechStacks;
     }
 
     //== 비즈니스 로직 ==//
@@ -63,5 +62,9 @@ public class Member {
     public Boolean validatePw(String loginPw){
         /* 비밀번호가 7자리보다 작을 경우 체크 */
         return loginPw.length() >= 7;
+    }
+
+    public void changePwToEncrypt(String encryptedLoginPw) {
+        this.loginPw = encryptedLoginPw;
     }
 }

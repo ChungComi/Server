@@ -1,9 +1,11 @@
 package ChungComiServer.dot.core.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 
 @Entity
@@ -38,14 +40,32 @@ public class Post {
     public Post(){}
 
     /** 게시글 생성을 위한 생성자 **/
-    public Post(String title, String content){
+    @Builder
+    public Post(String title, String content) throws InvalidPropertiesFormatException {
+        validateTitle(title);
+        validateContent(content);
         this.title = title;
         this.content = content;
     }
 
     /** 게시글 수정을 위한 메서드 **/
-    public void modifyPost(String title, String content){
+    public void modifyPost(String title, String content) throws InvalidPropertiesFormatException {
+        validateTitle(title);
+        validateContent(content);
         this.title = title;
         this.content = content;
     }
+
+    //== 비즈니스 로직 ==//
+    /** 제목 유효성 검사를 위한 메서드 **/
+    private void validateTitle(String title) throws InvalidPropertiesFormatException {
+        if(title == null || title.isBlank())
+            throw new InvalidPropertiesFormatException("제목은 비어있을 수 없습니다.");
+    }
+
+    private void validateContent(String content) throws InvalidPropertiesFormatException {
+        if(content == null || content.isBlank())
+            throw new InvalidPropertiesFormatException("본문은 비어있을 수 없습니다.");
+    }
+
 }

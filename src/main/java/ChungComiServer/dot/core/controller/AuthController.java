@@ -43,9 +43,10 @@ public class AuthController {
             log.info("register 컨트롤러 실행됨 id={},pw={}",registerDTO.getLoginId(),registerDTO.getLoginPw());
             if(result.hasErrors()){
                 StringBuilder stringBuilder = new StringBuilder();
-                result.getFieldErrors().forEach(fieldError -> stringBuilder.append(fieldError.getDefaultMessage()));
+                result.getFieldErrors().forEach(fieldError -> stringBuilder.append(fieldError.getDefaultMessage()+", "));
+                return Response.failure(new ErrorCode(stringBuilder.toString()));
             }
-            Long registeredId = authService.register(registerDTO.getName(), registerDTO.getLoginId(), registerDTO.getLoginPw(), registerDTO.getMemberCompanies(), registerDTO.getMemberTechStacks());
+            Long registeredId = authService.register(registerDTO.getName(), registerDTO.getLoginId(), registerDTO.getLoginPw());
             return Response.success(registeredId);
         } catch (InvalidPropertiesFormatException e) {
             return Response.failure(new ErrorCode(e.getMessage()));
