@@ -1,6 +1,7 @@
 package ChungComiServer.dot.core.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class Member {
     }
 
     /** 회원 가입 생성자 메서드 **/
+    @Builder
     public Member(String name, String loginId, String loginPw) throws InvalidPropertiesFormatException {
         /* 회원가입 시 사용할 생성자 메서드 */
         if(!validatePw(loginPw)) throw new InvalidPropertiesFormatException("유효하지 않은 비밀번호");

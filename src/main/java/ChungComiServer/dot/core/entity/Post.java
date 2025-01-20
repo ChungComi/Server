@@ -1,6 +1,7 @@
 package ChungComiServer.dot.core.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class Post {
     public Post(){}
 
     /** 게시글 생성을 위한 생성자 **/
+    @Builder
     public Post(String title, String content){
         this.title = title;
         this.content = content;
