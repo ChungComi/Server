@@ -12,7 +12,7 @@ public class PasswordUtil {
         return bCryptPasswordEncoder.encode(password);
     }
 
-    public boolean matches(String password, String encryptedPassword){
+    public boolean matches(String encryptedPassword, String password){
         return bCryptPasswordEncoder.matches(password,encryptedPassword);
     }
 
