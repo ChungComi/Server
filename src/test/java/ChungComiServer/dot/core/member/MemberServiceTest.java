@@ -1,2 +1,4 @@
-package ChungComiServer.dot.core.member;public class MemberServiceTest {
+package ChungComiServer.dot.core.member;
+
+public class MemberServiceTest {
 }

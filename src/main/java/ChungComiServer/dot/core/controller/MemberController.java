@@ -47,7 +47,7 @@ public class MemberController {
      * @Return: { String name; List memberCompanies{ Long preference; String companyName;} List memberTechStacks{ Long preference; String techStackName;} SchoolDTO school{ String name}; }
      */
     @GetMapping("/{memberId}")
-    public Response getMemberById(@PathVariable String memberId){
+    public Response getMemberById(@PathVariable("memberId") String memberId){
         try{
             ResponseMemberDTO foundMember = memberService.findById(memberId);
             return Response.success(foundMember);
@@ -61,8 +61,8 @@ public class MemberController {
      * @param memberName
      * @return { String name; List memberCompanies{ Long preference; String companyName;} List memberTechStacks{ Long preference; String techStackName;} SchoolDTO school{ String name}; }
      */
-    @GetMapping("/{memberName}")
-    public Response getMemberByName(@PathVariable String memberName){
+    @GetMapping("/name/{memberName}")
+    public Response getMemberByName(@PathVariable("memberName") String memberName){
         try{
             List<ResponseMemberDTO> foundMembers = memberService.findByName(memberName);
             return Response.success(foundMembers);
