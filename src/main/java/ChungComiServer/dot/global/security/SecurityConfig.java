@@ -40,7 +40,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable) // 비활성화 의도를 명시적으로 선언
+        http.csrf(AbstractHttpConfigurer::disable) // CSRF(Cross-Site Request Forgery)**는 사용자의 인증 정보를 악용하여, 사용자가 의도하지 않은 작업을 수행하게 만드는 공격 방지를 위한 검증 비활성화
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 상태 비저장
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/**").permitAll()
