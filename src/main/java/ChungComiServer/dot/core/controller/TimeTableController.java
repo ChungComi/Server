@@ -1,15 +1,16 @@
 package ChungComiServer.dot.core.controller;
 
+import ChungComiServer.dot.core.dto.timetable.RegisterTimeTableDTO;
 import ChungComiServer.dot.core.dto.timetable.ResponseTimeTableDTO;
 import ChungComiServer.dot.core.service.TimeTableService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
 import ChungComiServer.dot.global.security.UserContext;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +29,20 @@ public class TimeTableController {
             String userId = userContext.getUserId();
             List<ResponseTimeTableDTO> timeTableDTOs = timeTableService.findMyAllTimeTables(userId);
             return Response.success(timeTableDTOs);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @PostMapping("")
+    public Response addClass(@Valid @RequestBody RegisterTimeTableDTO registerTimeTableDTO, BindingResult result){
+        try {
+            if(result.hasErrors())
+                return Response.failure(new ErrorCode(result.getFieldError().toString()));
+            String userId = userContext.getUserId();
+            Long id = timeTableService.addClass(userId, registerTimeTableDTO.getClassName(),registerTimeTableDTO.getProfessor(),
+                    registerTimeTableDTO.getDayOfWeek(),registerTimeTableDTO.getStartTime(),registerTimeTableDTO.getEndTime());
+            return Response.success(id);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }
