@@ -39,6 +39,9 @@ public class Member {
     @JoinColumn(name = "SCHOOL_ID")
     School school;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    List<TimeTable> timeTables = new ArrayList<>();
+
     //== 연관관계 편의 메서드 ==//
 
     //== 생성 메서드 ==//
