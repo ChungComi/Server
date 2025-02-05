@@ -14,14 +14,17 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.security.Key;
 
 @Configuration
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer {
 
     private final JwtUtil jwtUtil;
+    private final JwtInterceptor jwtInterceptor;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -48,4 +51,11 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationfilter(), UsernamePasswordAuthenticationFilter.class); // JWT 필터 추가
         return http.build();
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(jwtInterceptor)
+                .excludePathPatterns("/auth/**");
+    }
+
 }
