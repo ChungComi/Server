@@ -7,6 +7,7 @@ import ChungComiServer.dot.core.dto.post.ResponsePostDTO;
 import ChungComiServer.dot.core.service.PostService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
+import ChungComiServer.dot.global.security.UserContext;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final UserContext userContext;
 
     @GetMapping("")
     public Response getAllPosts(){
@@ -58,7 +60,7 @@ public class PostController {
         try{
             if(result.hasErrors())
                 return Response.failure(new ErrorCode(result.getFieldError().toString()));
-            Long postId = postService.registerPost(registerPostDTO.getTitle(), registerPostDTO.getContent());
+            Long postId = postService.registerPost(userContext.getUserId(), registerPostDTO.getTitle(), registerPostDTO.getContent());
             return Response.success(postId);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
