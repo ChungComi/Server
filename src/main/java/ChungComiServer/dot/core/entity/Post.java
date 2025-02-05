@@ -68,4 +68,10 @@ public class Post {
             throw new InvalidPropertiesFormatException("본문은 비어있을 수 없습니다.");
     }
 
+    //== 연관관계 편의 메서드 ==//
+    public void addMemberRelationship(Member member){
+        this.member = member;
+        member.getPosts().add(this);
+    }
+
 }
