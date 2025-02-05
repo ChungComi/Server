@@ -37,7 +37,7 @@ public class MemberRepository {
 
     /** @Param: 회원 ID
      * @Return: 회원 객체 **/
-    public Member findById(String memberId) {
+    public Member findById(Long memberId) {
         return em.find(Member.class,memberId);
     }
 
