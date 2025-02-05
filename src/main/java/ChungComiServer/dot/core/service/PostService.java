@@ -1,7 +1,9 @@
 package ChungComiServer.dot.core.service;
 
 import ChungComiServer.dot.core.dto.post.ResponsePostDTO;
+import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.entity.Post;
+import ChungComiServer.dot.core.repository.MemberRepository;
 import ChungComiServer.dot.core.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,7 @@ import java.util.NoSuchElementException;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
     public List<ResponsePostDTO> findAll() {
         List<Post> posts = postRepository.findAll();
@@ -44,8 +47,10 @@ public class PostService {
     }
 
     @Transactional(readOnly = false)
-    public Long registerPost(String title, String content) throws InvalidPropertiesFormatException {
+    public Long registerPost(Long userId, String title, String content) throws InvalidPropertiesFormatException {
+        Member member = memberRepository.findById(userId);
         Post post = new Post(title,content);
+        post.addMemberRelationship(member);
         return postRepository.registerPost(post);
     }
 
