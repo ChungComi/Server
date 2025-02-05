@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.entity;
 
+import ChungComiServer.dot.core.enums.DayOfWeek;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -21,7 +22,7 @@ public class TimeTable {
     private String professor;
 
     @Column(name = "DAY_OF_WEEK")
-    private String dayOfWeek;
+    private DayOfWeek dayOfWeek;
 
     @Column(name = "START_TIME")
     private LocalDateTime startTime;
