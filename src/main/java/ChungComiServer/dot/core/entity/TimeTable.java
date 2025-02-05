@@ -33,4 +33,20 @@ public class TimeTable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    // == 연관관계 편의 메서드 == //
+    public void addMember(Member member){
+        this.member = member;
+        member.getTimeTables().add(this);
+    }
+
+    protected TimeTable(){}
+
+    public TimeTable(String className,String professor, DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime){
+        this.className = className;
+        this.professor = professor;
+        this.dayOfWeek = dayOfWeek;
+        this.startTime= startTime;
+        this.endTime = endTime;
+    }
 }
