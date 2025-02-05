@@ -18,6 +18,6 @@ public class School {
     @Column(name = "SCHOOL_NAME")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "school", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<Member> members = new ArrayList<>();
 }
