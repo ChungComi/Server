@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.controller;
 
+import ChungComiServer.dot.core.dto.timetable.ModifyTimeTableDTO;
 import ChungComiServer.dot.core.dto.timetable.RegisterTimeTableDTO;
 import ChungComiServer.dot.core.dto.timetable.ResponseTimeTableDTO;
 import ChungComiServer.dot.core.service.TimeTableService;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -43,6 +45,18 @@ public class TimeTableController {
             Long id = timeTableService.addClass(userId, registerTimeTableDTO.getClassName(),registerTimeTableDTO.getProfessor(),
                     registerTimeTableDTO.getDayOfWeek(),registerTimeTableDTO.getStartTime(),registerTimeTableDTO.getEndTime());
             return Response.success(id);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @PutMapping("{timeTableId}")
+    public Response modifyTimeTable(@PathVariable("timeTableId")String timeTableId,@RequestBody ModifyTimeTableDTO modifyTimeTableDTO){
+        try{
+            ResponseTimeTableDTO responseTimeTableDTO =
+                    timeTableService.modifyTimeTable(timeTableId, modifyTimeTableDTO.getClassName(),modifyTimeTableDTO.getProfessor(),
+                            modifyTimeTableDTO.getDayOfWeek(),modifyTimeTableDTO.getStartTime(),modifyTimeTableDTO.getEndTime());
+            return Response.success(responseTimeTableDTO);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }

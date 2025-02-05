@@ -49,4 +49,20 @@ public class TimeTable {
         this.startTime= startTime;
         this.endTime = endTime;
     }
+
+    /**
+     * 시간표 수정을 위한 메서드
+     */
+    public void modifyTimeTable(String className, String professor, DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime) {
+        if(className!=null)
+            this.className = className;
+        if(professor!=null)
+            this.professor = professor;
+        if(dayOfWeek!=null)
+            this.dayOfWeek = dayOfWeek;
+        if(startTime!=null)
+            this.startTime = startTime;
+        if(endTime!=null)
+            this.endTime = endTime;
+    }
 }

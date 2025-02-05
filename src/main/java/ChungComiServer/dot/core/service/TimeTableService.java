@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.service;
 
+import ChungComiServer.dot.core.dto.timetable.ModifyTimeTableDTO;
 import ChungComiServer.dot.core.dto.timetable.ResponseTimeTableDTO;
 import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.entity.TimeTable;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(readOnly = true)
@@ -29,6 +31,7 @@ public class TimeTableService {
         return timeTables.stream().map(ResponseTimeTableDTO::new).toList();
     }
 
+    @Transactional
     public Long addClass(String stringUserId, String className, String professor, DayOfWeek dayOfWeek,
                          LocalDateTime startTime, LocalDateTime endTime) {
         Long userId = Long.valueOf(stringUserId);
@@ -37,4 +40,15 @@ public class TimeTableService {
         timeTable.addMember(member);
         return timeTableRepository.addClass(timeTable);
     }
+
+    @Transactional
+    public ResponseTimeTableDTO modifyTimeTable(String stringTimeTableId, String className, String professor,
+                                                DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime ) {
+        Long timeTableId = Long.valueOf(stringTimeTableId);
+        TimeTable timeTable = timeTableRepository.findById(timeTableId);
+        timeTable.modifyTimeTable(className,professor,dayOfWeek,startTime,endTime);
+        return new ResponseTimeTableDTO(timeTable);
+    }
+    
+
 }

@@ -27,4 +27,9 @@ public class TimeTableRepository {
         em.persist(timeTable);
         return timeTable.getId();
     }
+
+    public TimeTable findById(Long timeTableId) {
+        return em.find(TimeTable.class, timeTableId);
+    }
+
 }
