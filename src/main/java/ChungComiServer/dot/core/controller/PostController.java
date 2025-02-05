@@ -70,7 +70,7 @@ public class PostController {
     @PutMapping("/{postId}")
     public Response modifyPost(@PathVariable("postId") String postId, @RequestBody ModifyPostDTO modifyPostDTO){
         try{
-            ResponsePostDTO responsePostDTO = postService.modifyPost(postId, modifyPostDTO.getTitle(), modifyPostDTO.getContent());
+            ResponsePostDTO responsePostDTO = postService.modifyPost(userContext.getUserId(), postId, modifyPostDTO.getTitle(), modifyPostDTO.getContent());
             return Response.success(responsePostDTO);
         } catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
@@ -80,7 +80,7 @@ public class PostController {
     @DeleteMapping("/{postId}")
     public Response deletePost(@PathVariable("postId") String postId){
         try{
-            postService.deletePost(postId);
+            postService.deletePost(userContext.getUserId(), postId);
             return Response.success();
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
