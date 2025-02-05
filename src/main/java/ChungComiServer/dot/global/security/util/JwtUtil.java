@@ -24,9 +24,9 @@ public class JwtUtil {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String generateToken(String username){
+    public String generateToken(Long id){
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(id.toString())
                 .claim("expirationTime",86400000)
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
                 .signWith(key,SignatureAlgorithm.HS256)
