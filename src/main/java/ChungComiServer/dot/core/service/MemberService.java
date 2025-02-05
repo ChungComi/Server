@@ -24,7 +24,8 @@ public class MemberService {
         return all.stream().map(ResponseMemberDTO::new).toList();
     }
 
-    public ResponseMemberDTO findById(String memberId) {
+    public ResponseMemberDTO findById(String stringMemberId) {
+        Long.valueOf(stringMemberId)
         Member foundMember = memberRepository.findById(memberId);
         if(foundMember == null){
             throw new NoSuchElementException("회원 존재 x");

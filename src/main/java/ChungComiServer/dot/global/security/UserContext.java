@@ -17,12 +17,12 @@ public class UserContext {
     private String userId;
 
     @PostConstruct
-    public void init(){
+    private void init(){
         log.info("웹 스코프 빈 생성");
     }
 
     @PreDestroy
-    public void destroy(){
+    private void destroy(){
         log.info("웹 스코프 빈 삭제");
     }
 
