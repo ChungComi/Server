@@ -29,8 +29,8 @@ public class AuthController {
             if(result.hasErrors()){
                 return Response.failure(new ErrorCode("아이디나 비밀번호를 입력하지 않음"));
             }
-            String username = authService.login(loginDTO.getLoginId(),loginDTO.getLoginPw());
-            String token = jwtUtil.generateToken(username);
+            Long id = authService.login(loginDTO.getLoginId(),loginDTO.getLoginPw());
+            String token = jwtUtil.generateToken(id);
             return Response.success(token);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));

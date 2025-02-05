@@ -50,8 +50,8 @@ class AuthControllerTest {
     void loginSuccess() throws Exception {
         LoginDTO loginDTO = new LoginDTO("testUser", "password123");
 
-        when(authService.login("testUser", "password123")).thenReturn("testUser");
-        when(jwtUtil.generateToken("testUser")).thenReturn("mockedToken");
+        when(authService.login("testUser", "password123")).thenReturn(1L);
+        when(jwtUtil.generateToken(1L)).thenReturn("mockedToken");
 
         mockMvc.perform(post("/auth/sign-in")
                         .contentType(MediaType.APPLICATION_JSON)
