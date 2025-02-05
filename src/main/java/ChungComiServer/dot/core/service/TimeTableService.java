@@ -31,7 +31,7 @@ public class TimeTableService {
         return timeTables.stream().map(ResponseTimeTableDTO::new).toList();
     }
 
-    @Transactional
+    @Transactional(readOnly = false)
     public Long addClass(String stringUserId, String className, String professor, DayOfWeek dayOfWeek,
                          LocalDateTime startTime, LocalDateTime endTime) {
         Long userId = Long.valueOf(stringUserId);
@@ -41,7 +41,7 @@ public class TimeTableService {
         return timeTableRepository.addClass(timeTable);
     }
 
-    @Transactional
+    @Transactional(readOnly = false)
     public ResponseTimeTableDTO modifyTimeTable(String stringTimeTableId, String className, String professor,
                                                 DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime ) {
         Long timeTableId = Long.valueOf(stringTimeTableId);
@@ -49,6 +49,10 @@ public class TimeTableService {
         timeTable.modifyTimeTable(className,professor,dayOfWeek,startTime,endTime);
         return new ResponseTimeTableDTO(timeTable);
     }
-    
 
+    @Transactional(readOnly = false)
+    public void deleteTimeTable(String stringTimeTableId) {
+        Long timeTableId = Long.valueOf(stringTimeTableId);
+        timeTableRepository.delete(timeTableId);
+    }
 }

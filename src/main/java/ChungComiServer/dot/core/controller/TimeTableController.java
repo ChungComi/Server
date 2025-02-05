@@ -51,7 +51,7 @@ public class TimeTableController {
     }
 
     @PutMapping("{timeTableId}")
-    public Response modifyTimeTable(@PathVariable("timeTableId")String timeTableId,@RequestBody ModifyTimeTableDTO modifyTimeTableDTO){
+    public Response modifyTimeTable(@PathVariable("timeTableId")String timeTableId, @RequestBody ModifyTimeTableDTO modifyTimeTableDTO){
         try{
             ResponseTimeTableDTO responseTimeTableDTO =
                     timeTableService.modifyTimeTable(timeTableId, modifyTimeTableDTO.getClassName(),modifyTimeTableDTO.getProfessor(),
@@ -61,4 +61,15 @@ public class TimeTableController {
             return Response.failure(new ErrorCode(e.getMessage()));
         }
     }
+
+    @DeleteMapping("{timeTableId}")
+    public Response deleteTimeTable(@PathVariable("timeTableId")String timeTableId){
+        try {
+            timeTableService.deleteTimeTable(timeTableId);
+            return Response.success();
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
 }

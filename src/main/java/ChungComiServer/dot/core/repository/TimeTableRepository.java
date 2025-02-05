@@ -32,4 +32,10 @@ public class TimeTableRepository {
         return em.find(TimeTable.class, timeTableId);
     }
 
+    public void delete(Long timeTableId) {
+        em.createQuery("delete from TimeTable t where t.id =:timeTableId")
+                .setParameter("timeTableId",timeTableId)
+                .executeUpdate();
+        em.clear();
+    }
 }
