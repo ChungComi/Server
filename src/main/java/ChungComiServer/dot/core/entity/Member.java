@@ -26,20 +26,20 @@ public class Member {
     @Column(name = "LOGIN_PW")
     String loginPw;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member" )
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<Post> posts;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<MemberCompany> memberCompanies = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<MemberTechStack> memberTechStacks = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SCHOOL_ID")
     School school;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     List<TimeTable> timeTables = new ArrayList<>();
 
     //== 연관관계 편의 메서드 ==//

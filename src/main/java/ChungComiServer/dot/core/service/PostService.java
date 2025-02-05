@@ -1,7 +1,9 @@
 package ChungComiServer.dot.core.service;
 
 import ChungComiServer.dot.core.dto.post.ResponsePostDTO;
+import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.entity.Post;
+import ChungComiServer.dot.core.repository.MemberRepository;
 import ChungComiServer.dot.core.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,7 @@ import java.util.NoSuchElementException;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
     public List<ResponsePostDTO> findAll() {
         List<Post> posts = postRepository.findAll();
@@ -44,22 +47,29 @@ public class PostService {
     }
 
     @Transactional(readOnly = false)
-    public Long registerPost(String title, String content) throws InvalidPropertiesFormatException {
+    public Long registerPost(Long userId, String title, String content) throws InvalidPropertiesFormatException {
+        Member member = memberRepository.findById(userId);
         Post post = new Post(title,content);
+        post.addMemberRelationship(member);
         return postRepository.registerPost(post);
     }
 
     @Transactional(readOnly = false)
-    public ResponsePostDTO modifyPost(String stringPostId, String title, String content) throws InvalidPropertiesFormatException {
+    public ResponsePostDTO modifyPost(Long userId, String stringPostId, String title, String content) throws InvalidPropertiesFormatException, IllegalAccessException {
         Long postId = Long.valueOf(stringPostId);
         Post post = postRepository.findById(postId);
-        post.modifyPost(title,content);
+        if(post.getMember().getId().equals(userId))
+            post.modifyPost(title,content);
+        else throw new IllegalAccessException("게시물 작성자만 수정이 가능합니다.");
         return new ResponsePostDTO(post);
     }
 
     @Transactional(readOnly = false)
-    public void deletePost(String stringPostId) {
+    public void deletePost(Long userId, String stringPostId) throws IllegalAccessException {
         Long postId = Long.valueOf(stringPostId);
-        postRepository.deletePost(postId);
+        Post post = postRepository.findById(postId);
+        if(post.getMember().getId().equals(userId))
+            postRepository.deletePost(postId);
+        else throw new IllegalAccessException("게시물 작성자만 삭제가 가능합니다.");
     }
 }

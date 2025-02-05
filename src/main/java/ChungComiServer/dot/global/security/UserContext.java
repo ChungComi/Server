@@ -14,7 +14,7 @@ import org.springframework.web.context.annotation.RequestScope;
 @Slf4j
 public class UserContext {
 
-    private String userId;
+    private Long userId;
 
     @PostConstruct
     private void init(){
@@ -27,6 +27,6 @@ public class UserContext {
     }
 
     public void saveUserIdAtInterceptor(String userId){
-        this.userId =userId;
+        this.userId =Long.valueOf(userId);
     }
 }

@@ -25,16 +25,14 @@ public class TimeTableService {
     private final TimeTableRepository timeTableRepository;
     private final MemberRepository memberRepository;
 
-    public List<ResponseTimeTableDTO> findMyAllTimeTables(String stringUserId) {
-        Long userId = Long.valueOf(stringUserId);
+    public List<ResponseTimeTableDTO> findMyAllTimeTables(Long userId) {
         List<TimeTable> timeTables =  timeTableRepository.findMyAllTimeTables(userId);
         return timeTables.stream().map(ResponseTimeTableDTO::new).toList();
     }
 
     @Transactional(readOnly = false)
-    public Long addClass(String stringUserId, String className, String professor, DayOfWeek dayOfWeek,
+    public Long addClass(Long userId, String className, String professor, DayOfWeek dayOfWeek,
                          LocalDateTime startTime, LocalDateTime endTime) {
-        Long userId = Long.valueOf(stringUserId);
         Member member = memberRepository.findById(userId);
         TimeTable timeTable = new TimeTable(className,professor,dayOfWeek,startTime,endTime);
         timeTable.addMember(member);

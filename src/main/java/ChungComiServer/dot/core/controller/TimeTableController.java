@@ -28,8 +28,7 @@ public class TimeTableController {
     @GetMapping("")
     public Response getMyTimeTables(){
         try {
-            String userId = userContext.getUserId();
-            List<ResponseTimeTableDTO> timeTableDTOs = timeTableService.findMyAllTimeTables(userId);
+            List<ResponseTimeTableDTO> timeTableDTOs = timeTableService.findMyAllTimeTables(userContext.getUserId());
             return Response.success(timeTableDTOs);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
@@ -41,8 +40,7 @@ public class TimeTableController {
         try {
             if(result.hasErrors())
                 return Response.failure(new ErrorCode(result.getFieldError().toString()));
-            String userId = userContext.getUserId();
-            Long id = timeTableService.addClass(userId, registerTimeTableDTO.getClassName(),registerTimeTableDTO.getProfessor(),
+            Long id = timeTableService.addClass(userContext.getUserId(), registerTimeTableDTO.getClassName(),registerTimeTableDTO.getProfessor(),
                     registerTimeTableDTO.getDayOfWeek(),registerTimeTableDTO.getStartTime(),registerTimeTableDTO.getEndTime());
             return Response.success(id);
         }catch (Exception e){
