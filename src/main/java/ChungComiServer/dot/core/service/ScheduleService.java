@@ -1,14 +1,17 @@
 package ChungComiServer.dot.core.service;
 
 import ChungComiServer.dot.core.dto.schedule.ResponseScheduleDTO;
+import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.entity.Schedule;
 import ChungComiServer.dot.core.enums.Month;
+import ChungComiServer.dot.core.repository.MemberRepository;
 import ChungComiServer.dot.core.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -18,10 +21,20 @@ import java.util.List;
 public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
+    private final MemberRepository memberRepository;
 
-    public List<ResponseScheduleDTO> getAllSchedulesOfTheMonth(Month month) {
+    public List<ResponseScheduleDTO> getAllSchedulesOfTheMonth(Long userId, Month month) {
         int ordinalMonth = month.getMonthNumber();
-        List<Schedule> schedules = scheduleRepository.getAllSchedulesOfTheMonth(ordinalMonth);
+        List<Schedule> schedules = scheduleRepository.getAllSchedulesOfTheMonth(userId, ordinalMonth);
         return schedules.stream().map(ResponseScheduleDTO::new).toList();
     }
+
+    @Transactional(readOnly = false)
+    public Long registerSchedule(Long userId, String content, LocalDateTime date) {
+        Member member = memberRepository.findById(userId);
+        Schedule schedule = new Schedule(content,date);
+        schedule.addMember(member);
+        return scheduleRepository.registerSchedule(schedule);
+    }
+
 }
