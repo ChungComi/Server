@@ -58,4 +58,14 @@ public class ScheduleController {
         }
     }
 
+    @DeleteMapping("{scheduleId}")
+    public Response deleteSchedule(@PathVariable String scheduleId){
+        try{
+            scheduleService.deleteSchedule(userContext.getUserId(),scheduleId);
+            return Response.success();
+        } catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
 }

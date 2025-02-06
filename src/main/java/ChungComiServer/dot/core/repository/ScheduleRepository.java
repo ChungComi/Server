@@ -31,4 +31,11 @@ public class ScheduleRepository {
     public Schedule findById(Long scheduleId) {
         return em.find(Schedule.class,scheduleId);
     }
+
+    public void deleteSchedule(Long scheduleId) {
+        em.createQuery("delete from Schedule s where s.id=:scheduleId")
+                .setParameter("scheduleId",scheduleId)
+                .executeUpdate();
+        em.clear();
+    }
 }

@@ -45,4 +45,12 @@ public class ScheduleService {
         schedule.modifySchedule(userId,content,date);
         return new ResponseScheduleDTO(schedule);
     }
+
+    public void deleteSchedule(Long userId, String stringScheduleId) throws IllegalAccessException {
+        Long scheduleId = Long.valueOf(stringScheduleId);
+        Schedule schedule = scheduleRepository.findById(userId);
+        if(!schedule.getMember().getId().equals(userId))
+            throw new IllegalAccessException("일정 작성자만 삭제 가능합니다.");
+        scheduleRepository.deleteSchedule(scheduleId);
+    }
 }
