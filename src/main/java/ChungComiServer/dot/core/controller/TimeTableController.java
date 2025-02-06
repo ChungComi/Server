@@ -52,7 +52,7 @@ public class TimeTableController {
     public Response modifyTimeTable(@PathVariable("timeTableId")String timeTableId, @RequestBody ModifyTimeTableDTO modifyTimeTableDTO){
         try{
             ResponseTimeTableDTO responseTimeTableDTO =
-                    timeTableService.modifyTimeTable(timeTableId, modifyTimeTableDTO.getClassName(),modifyTimeTableDTO.getProfessor(),
+                    timeTableService.modifyTimeTable(userContext.getUserId(), timeTableId, modifyTimeTableDTO.getClassName(),modifyTimeTableDTO.getProfessor(),
                             modifyTimeTableDTO.getDayOfWeek(),modifyTimeTableDTO.getStartTime(),modifyTimeTableDTO.getEndTime());
             return Response.success(responseTimeTableDTO);
         }catch (Exception e){
@@ -63,7 +63,7 @@ public class TimeTableController {
     @DeleteMapping("{timeTableId}")
     public Response deleteTimeTable(@PathVariable("timeTableId")String timeTableId){
         try {
-            timeTableService.deleteTimeTable(timeTableId);
+            timeTableService.deleteTimeTable(userContext.getUserId(),timeTableId);
             return Response.success();
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
