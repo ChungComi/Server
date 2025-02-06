@@ -27,4 +27,8 @@ public class ScheduleRepository {
         em.persist(schedule);
         return schedule.getId();
     }
+
+    public Schedule findById(Long scheduleId) {
+        return em.find(Schedule.class,scheduleId);
+    }
 }

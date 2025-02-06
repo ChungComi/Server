@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -37,4 +38,11 @@ public class ScheduleService {
         return scheduleRepository.registerSchedule(schedule);
     }
 
+    @Transactional(readOnly = false)
+    public ResponseScheduleDTO modifySchedule(Long userId, String stringScheduleId, String content, LocalDateTime date) throws InvalidPropertiesFormatException, IllegalAccessException {
+        Long scheduleId = Long.valueOf(stringScheduleId);
+        Schedule schedule = scheduleRepository.findById(scheduleId);
+        schedule.modifySchedule(userId,content,date);
+        return new ResponseScheduleDTO(schedule);
+    }
 }

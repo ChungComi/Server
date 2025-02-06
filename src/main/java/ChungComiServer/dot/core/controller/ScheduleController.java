@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.controller;
 
+import ChungComiServer.dot.core.dto.schedule.ModifyScheduleDTO;
 import ChungComiServer.dot.core.dto.schedule.RegisterScheduleDTO;
 import ChungComiServer.dot.core.dto.schedule.ResponseScheduleDTO;
 import ChungComiServer.dot.core.enums.Month;
@@ -42,6 +43,17 @@ public class ScheduleController {
             Long id = scheduleService.registerSchedule(userContext.getUserId(),registerScheduleDTO.getContent(),registerScheduleDTO.getDate());
             return Response.success(id);
         }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @PutMapping("{scheduleId}")
+    public Response modifySchedule(@PathVariable String scheduleId, @RequestBody ModifyScheduleDTO modifyScheduleDTO){
+        try{
+            ResponseScheduleDTO schedule =
+                    scheduleService.modifySchedule(userContext.getUserId(), scheduleId,modifyScheduleDTO.getContent(),modifyScheduleDTO.getDate());
+            return Response.success(schedule);
+        } catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }
     }
