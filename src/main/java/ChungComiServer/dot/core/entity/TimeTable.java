@@ -22,6 +22,7 @@ public class TimeTable {
     private String professor;
 
     @Column(name = "DAY_OF_WEEK")
+    @Enumerated(value = EnumType.STRING)
     private DayOfWeek dayOfWeek;
 
     @Column(name = "START_TIME")
