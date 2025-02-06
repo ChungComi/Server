@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
+import java.util.InvalidPropertiesFormatException;
 
 @Entity
 @Slf4j
@@ -37,5 +38,27 @@ public class Schedule {
     public void addMember(Member member) {
         this.member = member;
         member.getSchedules().add(this);
+    }
+
+    /** 일정 수정을 위한 메서드 **/
+    public void modifySchedule(Long userId, String content, LocalDateTime date) throws IllegalAccessException, InvalidPropertiesFormatException {
+        if(!member.getId().equals(userId))
+            throw new IllegalAccessException("일정 작성자만 일정 수정이 가능합니다.");
+        validateContent(content);
+        validateDate(date);
+        this.content = content;
+        this.date = date;
+    }
+
+    /** 일정 내용 유효성 검사 메서드 **/
+    private void validateContent(String content) throws InvalidPropertiesFormatException {
+        if(content==null || content.isBlank())
+            throw new InvalidPropertiesFormatException("일정 내용은 비어있을 수 없습니다.");
+    }
+
+    /** 날짜 유효성 검사 메서드 **/
+    private void validateDate(LocalDateTime date) throws InvalidPropertiesFormatException {
+        if (date == null)
+            throw new InvalidPropertiesFormatException("날짜는 비어있을 수 없습니다.");
     }
 }
