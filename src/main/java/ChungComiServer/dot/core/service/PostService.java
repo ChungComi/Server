@@ -58,9 +58,7 @@ public class PostService {
     public ResponsePostDTO modifyPost(Long userId, String stringPostId, String title, String content) throws InvalidPropertiesFormatException, IllegalAccessException {
         Long postId = Long.valueOf(stringPostId);
         Post post = postRepository.findById(postId);
-        if(post.getMember().getId().equals(userId))
-            post.modifyPost(title,content);
-        else throw new IllegalAccessException("게시물 작성자만 수정이 가능합니다.");
+        post.modifyPost(userId,title,content);
         return new ResponsePostDTO(post);
     }
 

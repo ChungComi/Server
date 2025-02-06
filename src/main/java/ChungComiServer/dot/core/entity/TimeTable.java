@@ -55,7 +55,9 @@ public class TimeTable {
     /**
      * 시간표 수정을 위한 메서드
      */
-    public void modifyTimeTable(String className, String professor, DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime) throws InvalidPropertiesFormatException {
+    public void modifyTimeTable(Long userId, String className, String professor, DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime) throws InvalidPropertiesFormatException, IllegalAccessException {
+        if(!member.getId().equals(userId))
+            throw new IllegalAccessException("시간표 수정은 작성자만 가능합니다.");
         validateClassName(className);
         validateProfessor(professor);
         validateDayOfWeek(dayOfWeek);
