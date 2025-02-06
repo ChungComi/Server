@@ -25,4 +25,17 @@ public class Schedule {
 
     @Column(name = "DATE")
     private LocalDateTime date;
+
+    protected Schedule(){}
+
+    public Schedule(String content, LocalDateTime date){
+        this.content = content;
+        this.date = date;
+    }
+
+    // == 연관관계 편의 메서드 == //
+    public void addMember(Member member) {
+        this.member = member;
+        member.getSchedules().add(this);
+    }
 }
