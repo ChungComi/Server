@@ -44,6 +44,7 @@ public class CompanyService {
         return companies.stream().map(ResponseInterestDTO::new).toList();
     }
 
+    /** 개발자가 기업 등록 시 사용할 메서드 x **/
     @Transactional
     public Long register(String companyName,String companyDescription) {
         Interest company = new Company(companyName,companyDescription);
@@ -53,6 +54,7 @@ public class CompanyService {
         return companyId;
     }
 
+    /** 개발자가 기업 정보 변경을 위해 사용할 메서드**/
     @Transactional
     public ResponseInterestDTO modifyCompanyInfo(String StringCompanyId, String name, String description) {
             Long companyId = Long.valueOf(StringCompanyId);
