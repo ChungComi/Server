@@ -39,7 +39,7 @@ public class PostServiceTest extends ServiceTest {
             //when
             List<Long> postIds = new ArrayList<>();
             for (Post post : posts) {
-                 postIds.add(postService.registerPost(post.getTitle(), post.getContent()));
+                 postIds.add(postService.registerPost(null,post.getTitle(), post.getContent()));
             }
 
 
@@ -59,7 +59,7 @@ public class PostServiceTest extends ServiceTest {
         public void 잘못된_게시물_등록(String title,String content) throws Exception{
             //expect
             org.junit.jupiter.api.Assertions.assertThrows(InvalidPropertiesFormatException.class,()->
-                    postService.registerPost(title,content));
+                    postService.registerPost(null,title,content));
             //then
         }
 
@@ -69,7 +69,7 @@ public class PostServiceTest extends ServiceTest {
             //given
 
             //when
-            Long registeredId = postService.registerPost(title, content);
+            Long registeredId = postService.registerPost(null,title, content);
             //then
             Assertions.assertThat(postService.findById(String.valueOf(registeredId)))
                     .isExactlyInstanceOf(ResponsePostDTO.class);
@@ -91,7 +91,7 @@ public class PostServiceTest extends ServiceTest {
 
             //when
             for (Post post : posts) {
-                postService.registerPost(post.getTitle(),post.getContent());
+                postService.registerPost(null,post.getTitle(),post.getContent());
             }
 
             //then
@@ -120,14 +120,14 @@ public class PostServiceTest extends ServiceTest {
     class 게시물_수정_삭제는{
         @ParameterizedTest
         @MethodSource("generateArguments")
-        public void 제대로된_게시물_수정(String title,String content) throws InvalidPropertiesFormatException {
+        public void 제대로된_게시물_수정(String title,String content) throws InvalidPropertiesFormatException, IllegalAccessException {
             //given
             Post post = new Post("abc","def");
             //when
-            Long registeredId = postService.registerPost(post.getTitle(), post.getContent());
+            Long registeredId = postService.registerPost(null,post.getTitle(), post.getContent());
 
             //then
-            Assertions.assertThat(postService.modifyPost(String.valueOf(registeredId),title,content))
+            Assertions.assertThat(postService.modifyPost(null, String.valueOf(registeredId),title,content))
                     .usingRecursiveComparison()
                     .isEqualTo(new ResponsePostDTO((new Post(title,content))));
         }
@@ -139,21 +139,21 @@ public class PostServiceTest extends ServiceTest {
             Post post = new Post("abc","def");
 
             //when
-            Long registeredId = postService.registerPost(post.getTitle(), post.getContent());
+            Long registeredId = postService.registerPost(null,post.getTitle(), post.getContent());
 
             //Expect
             org.junit.jupiter.api.Assertions.assertThrows(InvalidPropertiesFormatException.class,()->
-                    postService.modifyPost(String.valueOf(registeredId),title,content));
+                    postService.modifyPost(null, String.valueOf(registeredId),title,content));
         }
 
         @Test
         public void 게시물_삭제() throws Exception {
             //given
             Post post = new Post("abc","def");
-            Long registeredId = postService.registerPost(post.getTitle(), post.getContent());
+            Long registeredId = postService.registerPost(null,post.getTitle(), post.getContent());
 
             //when
-            postService.deletePost(String.valueOf(registeredId));
+            postService.deletePost(null,String.valueOf(registeredId));
 
             //expect
             org.junit.jupiter.api.Assertions.assertThrows(NoSuchElementException.class,() ->

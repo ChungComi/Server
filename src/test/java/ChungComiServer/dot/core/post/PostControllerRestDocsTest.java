@@ -94,7 +94,7 @@ public class PostControllerRestDocsTest {
     public void 게시물_작성() throws Exception{
         //given
         ResponsePostDTO post = new ResponsePostDTO(new Post("title","content"));
-        when(postService.registerPost("title","content")).thenReturn(1L);
+        when(postService.registerPost(null,"title","content")).thenReturn(1L);
         //when
         this.mockMvc.perform(post("/post")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -110,7 +110,7 @@ public class PostControllerRestDocsTest {
     public void 게시물_수정() throws Exception {
         //given
         ResponsePostDTO post = new ResponsePostDTO(Post.builder().title("title2").content("content2").build());
-        when(postService.modifyPost("1","title2","content2"))
+        when(postService.modifyPost(null, "1","title2","content2"))
                 .thenReturn(post);
         //when
         this.mockMvc.perform(put("/post/{postId}",1)
@@ -128,7 +128,7 @@ public class PostControllerRestDocsTest {
     public void 게시물_삭제() throws Exception {
         //given
         String postId = "1";
-        doNothing().when(postService).deletePost(postId);
+        doNothing().when(postService).deletePost(null,postId);
 
         //when
         this.mockMvc.perform(delete("/post/{postId}",postId))
