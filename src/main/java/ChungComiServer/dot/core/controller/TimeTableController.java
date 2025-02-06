@@ -36,7 +36,7 @@ public class TimeTableController {
     }
 
     @PostMapping("")
-    public Response addClass(@Valid @RequestBody RegisterTimeTableDTO registerTimeTableDTO, BindingResult result){
+    public Response registerClass(@Valid @RequestBody RegisterTimeTableDTO registerTimeTableDTO, BindingResult result){
         try {
             if(result.hasErrors())
                 return Response.failure(new ErrorCode(result.getFieldError().toString()));
