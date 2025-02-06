@@ -3,11 +3,13 @@ package ChungComiServer.dot.core.dto.member;
 import ChungComiServer.dot.core.dto.school.SchoolDTO;
 import ChungComiServer.dot.core.entity.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 public class ResponseMemberDTO {
 
     private String name;

@@ -2,10 +2,12 @@ package ChungComiServer.dot.core.dto.comment;
 
 import ChungComiServer.dot.core.entity.Comment;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class CommentDTO {
     private String content;
     private Long likes;

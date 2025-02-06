@@ -42,6 +42,9 @@ public class Member {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     List<TimeTable> timeTables = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL,orphanRemoval = true)
+    List<Schedule> schedules = new ArrayList<>();
+
     //== 연관관계 편의 메서드 ==//
 
     //== 생성 메서드 ==//

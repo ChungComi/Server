@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public class TimeTableService {
 
     @Transactional(readOnly = false)
     public ResponseTimeTableDTO modifyTimeTable(String stringTimeTableId, String className, String professor,
-                                                DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime ) {
+                                                DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime ) throws InvalidPropertiesFormatException {
         Long timeTableId = Long.valueOf(stringTimeTableId);
         TimeTable timeTable = timeTableRepository.findById(timeTableId);
         timeTable.modifyTimeTable(className,professor,dayOfWeek,startTime,endTime);
