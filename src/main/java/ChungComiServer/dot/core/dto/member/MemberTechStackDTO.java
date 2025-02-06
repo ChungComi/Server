@@ -1,8 +1,10 @@
 package ChungComiServer.dot.core.dto.member;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class MemberTechStackDTO {
     private Long preference;
     private String techStackName;
