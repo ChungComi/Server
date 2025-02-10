@@ -25,7 +25,7 @@ public class MemberService {
     }
 
     public ResponseMemberDTO findById(String stringMemberId) {
-        Long.valueOf(stringMemberId)
+        Long memberId = Long.valueOf(stringMemberId);
         Member foundMember = memberRepository.findById(memberId);
         if(foundMember == null){
             throw new NoSuchElementException("회원 존재 x");
