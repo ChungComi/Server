@@ -46,6 +46,7 @@ public class ScheduleService {
         return new ResponseScheduleDTO(schedule);
     }
 
+    @Transactional(readOnly = false)
     public void deleteSchedule(Long userId, String stringScheduleId) throws IllegalAccessException {
         Long scheduleId = Long.valueOf(stringScheduleId);
         Schedule schedule = scheduleRepository.findById(userId);

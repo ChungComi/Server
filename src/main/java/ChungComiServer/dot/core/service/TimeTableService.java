@@ -41,17 +41,19 @@ public class TimeTableService {
     }
 
     @Transactional(readOnly = false)
-    public ResponseTimeTableDTO modifyTimeTable(String stringTimeTableId, String className, String professor,
-                                                DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime ) throws InvalidPropertiesFormatException {
+    public ResponseTimeTableDTO modifyTimeTable(Long userId, String stringTimeTableId, String className, String professor,
+                                                DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime ) throws InvalidPropertiesFormatException, IllegalAccessException {
         Long timeTableId = Long.valueOf(stringTimeTableId);
         TimeTable timeTable = timeTableRepository.findById(timeTableId);
-        timeTable.modifyTimeTable(className,professor,dayOfWeek,startTime,endTime);
+        timeTable.modifyTimeTable(userId,className,professor,dayOfWeek,startTime,endTime);
         return new ResponseTimeTableDTO(timeTable);
     }
 
     @Transactional(readOnly = false)
-    public void deleteTimeTable(String stringTimeTableId) {
+    public void deleteTimeTable(Long userId, String stringTimeTableId) throws IllegalAccessException {
         Long timeTableId = Long.valueOf(stringTimeTableId);
+        if(!timeTableRepository.findById(timeTableId).getMember().getId().equals(userId))
+            throw new IllegalAccessException("일정 작성자만 삭제 가능합니다.");
         timeTableRepository.delete(timeTableId);
     }
 }
