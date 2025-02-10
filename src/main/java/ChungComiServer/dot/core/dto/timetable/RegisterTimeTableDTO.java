@@ -16,7 +16,7 @@ public class RegisterTimeTableDTO {
     private String className;
     @NotEmpty
     private String professor;
-    @NotEmpty
+    @NotNull
     private DayOfWeek dayOfWeek;
     @NotNull
     private LocalDateTime startTime;
