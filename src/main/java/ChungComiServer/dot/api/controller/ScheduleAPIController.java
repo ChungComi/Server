@@ -1,5 +1,6 @@
 package ChungComiServer.dot.api.controller;
 
+import ChungComiServer.dot.core.dto.schedule.ResponseIdScheduleDTO;
 import ChungComiServer.dot.core.dto.schedule.ResponseScheduleDTO;
 import ChungComiServer.dot.core.enums.Month;
 import ChungComiServer.dot.core.service.ScheduleService;
@@ -29,8 +30,8 @@ public class ScheduleAPIController {
     @GetMapping("")
     public Response getSchedulesOfTheDate(LocalDateTime date){
         try{
-            List<ResponseScheduleDTO> responseScheduleDTOs = scheduleService.getSchedulesOfTheDate(userContext.getUserId(), date);
-            return Response.success(responseScheduleDTOs);
+            List<ResponseIdScheduleDTO> responseIdScheduleDTOs = scheduleService.getSchedulesOfTheDate(userContext.getUserId(), date);
+            return Response.success(responseIdScheduleDTOs);
         } catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }
