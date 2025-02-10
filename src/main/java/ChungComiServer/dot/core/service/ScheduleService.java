@@ -54,4 +54,9 @@ public class ScheduleService {
             throw new IllegalAccessException("일정 작성자만 삭제 가능합니다.");
         scheduleRepository.deleteSchedule(scheduleId);
     }
+
+    public List<ResponseScheduleDTO> getSchedulesOfTheDate(Long userId, LocalDateTime date) {
+        List<Schedule> schedules = scheduleRepository.findByDate(userId,date);
+        return schedules.stream().map(ResponseScheduleDTO::new).toList();
+    }
 }

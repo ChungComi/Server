@@ -1,12 +1,12 @@
 package ChungComiServer.dot.core.repository;
 
 import ChungComiServer.dot.core.entity.Schedule;
-import ChungComiServer.dot.core.enums.Month;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -37,5 +37,12 @@ public class ScheduleRepository {
                 .setParameter("scheduleId",scheduleId)
                 .executeUpdate();
         em.clear();
+    }
+
+    public List<Schedule> findByDate(Long userId, LocalDateTime date) {
+        return em.createQuery("select s from Schedule s where s.date =:date and member.id =:userId",Schedule.class)
+                .setParameter("date",date)
+                .setParameter("userId",userId)
+                .getResultList();
     }
 }
