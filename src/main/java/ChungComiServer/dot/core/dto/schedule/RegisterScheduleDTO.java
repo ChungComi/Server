@@ -1,6 +1,7 @@
 package ChungComiServer.dot.core.dto.schedule;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,6 @@ import java.time.LocalDateTime;
 public class RegisterScheduleDTO {
     @NotEmpty
     private String content;
-    @NotEmpty
+    @NotNull
     private LocalDateTime date;
 }
