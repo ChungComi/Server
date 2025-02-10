@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.service;
 
+import ChungComiServer.dot.core.dto.schedule.ResponseIdScheduleDTO;
 import ChungComiServer.dot.core.dto.schedule.ResponseScheduleDTO;
 import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.entity.Schedule;
@@ -55,8 +56,8 @@ public class ScheduleService {
         scheduleRepository.deleteSchedule(scheduleId);
     }
 
-    public List<ResponseScheduleDTO> getSchedulesOfTheDate(Long userId, LocalDateTime date) {
+    public List<ResponseIdScheduleDTO> getSchedulesOfTheDate(Long userId, LocalDateTime date) {
         List<Schedule> schedules = scheduleRepository.findByDate(userId,date);
-        return schedules.stream().map(ResponseScheduleDTO::new).toList();
+        return schedules.stream().map(ResponseIdScheduleDTO::new).toList();
     }
 }
