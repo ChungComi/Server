@@ -19,7 +19,7 @@ public class ResponseTimeTableDTO {
 
     public ResponseTimeTableDTO(TimeTable timeTable) {
         this.className = timeTable.getClassName();
-        this.professor = timeTable.getClassName();
+        this.professor = timeTable.getProfessor();
         this.dayOfWeek = timeTable.getDayOfWeek();
         this.startTime = timeTable.getStartTime();
         this.endTime = timeTable.getEndTime();
