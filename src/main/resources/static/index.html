@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기업 등록</title>
 </head>
 <body>
-$END$
+<div class="container">
+    <h2>기업 등록</h2>
+    <form id="registerForm">
+        <label for="name">기업명:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="description">기업 설명:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <button type="submit">등록</button>
+    </form>
+
+    <div id="responseMessage"></div> <!-- 서버 응답 메시지 표시 -->
+</div>
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // 기본 폼 제출 방지
+
+        const name = document.getElementById("name").value;
+        const description = document.getElementById("description").value;
+
+        fetch("/company/sign-up", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: name, description: description })
+        })
+            .then(response => response.json())
+            .then(data => {
+                const responseMessage = document.getElementById("responseMessage");
+                if (data.success) {
+                    responseMessage.innerHTML = `<p style="color: green;">기업 등록 성공! ID: ${data.result.data}</p>`;
+                } else {
+                    responseMessage.innerHTML = `<p style="color: red;">실패: ${data.result.message}</p>`;
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("responseMessage").innerHTML = `<p style="color: red;">서버 오류 발생</p>`;
+            });
+    });
+</script>
 </body>
 </html>
