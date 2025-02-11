@@ -3,6 +3,7 @@ package ChungComiServer.dot.api.controller;
 import ChungComiServer.dot.api.dto.GetMemberCompaniesDTO;
 import ChungComiServer.dot.api.service.MemberApiService;
 import ChungComiServer.dot.core.dto.member.ResponseMemberDTO;
+import ChungComiServer.dot.core.dto.school.SchoolDTO;
 import ChungComiServer.dot.core.service.MemberService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
@@ -30,7 +31,16 @@ public class MemberApiController {
             return Response.failure(new ErrorCode(e.getMessage()));
         }
     }
-    
+
+    @PostMapping("/school")
+    public Response registerSchool(@RequestBody SchoolDTO schoolDTO){
+        try{
+            Long schoolId = memberApiService.registerSchool(userContext.getUserId(),schoolDTO.getName());
+            return Response.success(schoolId);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
 
 
     /**

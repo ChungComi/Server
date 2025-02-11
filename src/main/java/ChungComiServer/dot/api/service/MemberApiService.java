@@ -3,6 +3,8 @@ package ChungComiServer.dot.api.service;
 import ChungComiServer.dot.api.dto.GetMemberCompaniesDTO;
 import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.api.repository.MemberApiRepository;
+import ChungComiServer.dot.core.entity.School;
+import ChungComiServer.dot.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.NoSuchElementException;
 public class MemberApiService {
 
     private final MemberApiRepository memberApiRepository;
+    private final MemberRepository memberRepository;
 
     public GetMemberCompaniesDTO findMemberCompaniesById(Long memberId) {
         Member memberCompanies = memberApiRepository.findMemberCompanies(memberId);
@@ -24,5 +27,13 @@ public class MemberApiService {
             throw new NoSuchElementException("멤버가 존재하지 않음");
         return new GetMemberCompaniesDTO(memberCompanies);
 
+    }
+
+    @Transactional(readOnly = false)
+    public Long registerSchool(Long userId, String name) {
+        School school = new School(name);
+        Member member = memberRepository.findById(userId);
+        member.adjustSchool(school);
+        return school.getId();
     }
 }
