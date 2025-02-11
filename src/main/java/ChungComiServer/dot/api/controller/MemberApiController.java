@@ -61,4 +61,24 @@ public class MemberApiController {
         }
     }
 
+    @PostMapping("/company/{companyName}")
+    public Response setMemberCompaniesByName(@PathVariable("companyName")String companyName){
+        try{
+            Long memberCompanyId = memberApiService.setMemberCompaniesByName(userContext.getUserId(), companyName);
+            return Response.success(memberCompanyId);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @PostMapping("/tech-stack/{tech-stackName}")
+    public Response setMemberTechStackByName(@PathVariable("tech-stackName")String techStackName){
+        try{
+            Long memberTechStackId = memberApiService.setMemberTechStackByName(userContext.getUserId(),techStackName);
+            return Response.success(memberTechStackId);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
 }
