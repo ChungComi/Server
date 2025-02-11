@@ -1,6 +1,7 @@
 package ChungComiServer.dot.core.controller;
 
 import ChungComiServer.dot.core.dto.interest.ModifyInterestDTO;
+import ChungComiServer.dot.core.dto.interest.RegisterInterestDTO;
 import ChungComiServer.dot.core.dto.interest.ResponseInterestDTO;
 import ChungComiServer.dot.core.service.TechStackService;
 import ChungComiServer.dot.global.response.ErrorCode;
@@ -46,6 +47,18 @@ public class TechStackController {
         try{
             List<ResponseInterestDTO> techStackDTOs = techStackService.findByName(techStackName);
             return Response.success(techStackDTOs);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @PostMapping("/sign-up")
+    public Response registerTechStack(@Valid @RequestBody RegisterInterestDTO registerTechStackDTO, BindingResult result){
+        try {
+            if (result.hasErrors())
+                return Response.failure(new ErrorCode(result.getFieldError().toString()));
+            Long techStackId = techStackService.register(registerTechStackDTO.getName(),registerTechStackDTO.getDescription());
+            return Response.success(techStackId);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }
