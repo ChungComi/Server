@@ -47,9 +47,6 @@ public class JwtAuthenticationFilter implements Filter {
 
     private boolean isNoNeedAuth(String requestURI) {
         log.info("isNoNeedAuth method");
-        if(requestURI.startsWith("/auth")){
-            return true;
-        }
-        return false;
+        return requestURI.startsWith("/auth") || requestURI.equals("/index.html") || requestURI.equals("/") ||requestURI.startsWith("/company");
     }
 }
