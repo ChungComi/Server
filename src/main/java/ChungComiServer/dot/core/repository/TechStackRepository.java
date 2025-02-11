@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.repository;
 
+import ChungComiServer.dot.core.entity.interest.Interest;
 import ChungComiServer.dot.core.entity.interest.TechStack;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -33,4 +34,8 @@ public class TechStackRepository {
                 .getResultList();
     }
 
+    public Long register(Interest techStack) {
+        em.persist(techStack);
+        return techStack.getId();
+    }
 }

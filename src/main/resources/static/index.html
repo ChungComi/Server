@@ -3,30 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기업 등록</title>
+    <title>기업 및 기술 스택 등록</title>
 </head>
 <body>
 <div class="container">
     <h2>기업 등록</h2>
-    <form id="registerForm">
-        <label for="name">기업명:</label>
-        <input type="text" id="name" name="name" required>
+    <form id="registerCompanyForm">
+        <label for="companyName">기업명:</label>
+        <input type="text" id="companyName" name="name" required>
 
-        <label for="description">기업 설명:</label>
-        <textarea id="description" name="description" required></textarea>
+        <label for="companyDescription">기업 설명:</label>
+        <textarea id="companyDescription" name="description" required></textarea>
 
-        <button type="submit">등록</button>
+        <button type="submit">기업 등록</button>
     </form>
+    <div id="companyResponseMessage"></div> <!-- 기업 등록 서버 응답 메시지 -->
 
-    <div id="responseMessage"></div> <!-- 서버 응답 메시지 표시 -->
+    <hr>
+
+    <h2>기술 스택 등록</h2>
+    <form id="registerTechStackForm">
+        <label for="techStackName">기술 스택명:</label>
+        <input type="text" id="techStackName" name="name" required>
+
+        <label for="techStackDescription">기술 스택 설명:</label>
+        <textarea id="techStackDescription" name="description" required></textarea>
+
+        <button type="submit">기술 스택 등록</button>
+    </form>
+    <div id="techStackResponseMessage"></div> <!-- 기술 스택 등록 서버 응답 메시지 -->
 </div>
 
 <script>
-    document.getElementById("registerForm").addEventListener("submit", function(event) {
+    // 기업 등록 폼 제출 이벤트
+    document.getElementById("registerCompanyForm").addEventListener("submit", function(event) {
         event.preventDefault(); // 기본 폼 제출 방지
 
-        const name = document.getElementById("name").value;
-        const description = document.getElementById("description").value;
+        const name = document.getElementById("companyName").value;
+        const description = document.getElementById("companyDescription").value;
 
         fetch("/company/sign-up", {
             method: "POST",
@@ -37,7 +51,7 @@
         })
             .then(response => response.json())
             .then(data => {
-                const responseMessage = document.getElementById("responseMessage");
+                const responseMessage = document.getElementById("companyResponseMessage");
                 if (data.success) {
                     responseMessage.innerHTML = `<p style="color: green;">기업 등록 성공! ID: ${data.result.data}</p>`;
                 } else {
@@ -46,7 +60,36 @@
             })
             .catch(error => {
                 console.error("Error:", error);
-                document.getElementById("responseMessage").innerHTML = `<p style="color: red;">서버 오류 발생</p>`;
+                document.getElementById("companyResponseMessage").innerHTML = `<p style="color: red;">서버 오류 발생</p>`;
+            });
+    });
+
+    // 기술 스택 등록 폼 제출 이벤트
+    document.getElementById("registerTechStackForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // 기본 폼 제출 방지
+
+        const name = document.getElementById("techStackName").value;
+        const description = document.getElementById("techStackDescription").value;
+
+        fetch("/tech-stack/sign-up", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: name, description: description })
+        })
+            .then(response => response.json())
+            .then(data => {
+                const responseMessage = document.getElementById("techStackResponseMessage");
+                if (data.success) {
+                    responseMessage.innerHTML = `<p style="color: green;">기술 스택 등록 성공! ID: ${data.result.data}</p>`;
+                } else {
+                    responseMessage.innerHTML = `<p style="color: red;">실패: ${data.result.message}</p>`;
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("techStackResponseMessage").innerHTML = `<p style="color: red;">서버 오류 발생</p>`;
             });
     });
 </script>

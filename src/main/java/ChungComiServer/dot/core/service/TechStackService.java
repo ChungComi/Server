@@ -1,6 +1,7 @@
 package ChungComiServer.dot.core.service;
 
 import ChungComiServer.dot.core.dto.interest.ResponseInterestDTO;
+import ChungComiServer.dot.core.entity.interest.Interest;
 import ChungComiServer.dot.core.entity.interest.TechStack;
 import ChungComiServer.dot.core.repository.TechStackRepository;
 import lombok.RequiredArgsConstructor;
@@ -52,5 +53,14 @@ public class TechStackService {
             throw new NoSuchElementException("해당 기술 스택이 존재하지 않습니다.");
         techStack.modifyInfo(name,description);
         return new ResponseInterestDTO(techStack);
+    }
+
+    @Transactional
+    public Long register(String name, String description) {
+        Interest techStack = new TechStack(name,description);
+        Long techStackId = techStackRepository.register(techStack);
+        if(techStackId == null)
+            throw new RuntimeException("기업 저장 실패");
+        return techStackId;
     }
 }
