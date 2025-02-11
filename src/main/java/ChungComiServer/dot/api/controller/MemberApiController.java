@@ -1,14 +1,13 @@
 package ChungComiServer.dot.api.controller;
 
-import ChungComiServer.dot.api.dto.GetMemberCompaniesDTO;
 import ChungComiServer.dot.api.service.MemberApiService;
+
 import ChungComiServer.dot.core.dto.member.ResponseMemberDTO;
 import ChungComiServer.dot.core.dto.school.SchoolDTO;
 import ChungComiServer.dot.core.service.MemberService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
 import ChungComiServer.dot.global.security.UserContext;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -43,24 +42,6 @@ public class MemberApiController {
         }
     }
 
-    /**
-     * 나의 선호 기업 정보
-     * @Return:
-     * {
-     * String myName,
-     * List<GetCommentDetailDTO> companies {String name, Long rate }
-     * }
-     */
-    @GetMapping("/company")
-    public Response getMemberCompanies(){
-        try{
-            GetMemberCompaniesDTO myCompanies = memberApiService.findMemberCompaniesById(userContext.getUserId());
-            return Response.success(myCompanies);
-        }catch (Exception e){
-            return Response.failure(new ErrorCode(e.getMessage()));
-        }
-    }
-
     @PostMapping("/company/{companyName}")
     public Response setMemberCompaniesByName(@PathVariable("companyName")String companyName){
         try{
@@ -76,6 +57,26 @@ public class MemberApiController {
         try{
             Long memberTechStackId = memberApiService.setMemberTechStackByName(userContext.getUserId(),techStackName);
             return Response.success(memberTechStackId);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/company/{companyName}")
+    public Response deleteMemberCompaniesByName(@PathVariable("companyName")String companyName){
+        try{
+            memberApiService.deleteMemberCompanyByName(userContext.getUserId(),companyName);
+            return Response.success();
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/tech-stack/{tech-stackName}")
+    public Response deleteMemberTechStackByName(@PathVariable("tech-stackName")String techStackName){
+        try{
+            memberApiService.deleteMemberTechStackByName(userContext.getUserId(),techStackName);
+            return Response.success();
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }
