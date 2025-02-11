@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Timer;
 
 @Repository
 @RequiredArgsConstructor
@@ -38,4 +39,26 @@ public class TimeTableRepository {
                 .executeUpdate();
         em.clear();
     }
+
+    public boolean findIfItsAlreadyRegistered(Long userId, DayOfWeek dayOfWeek, LocalDateTime startTime, LocalDateTime endTime, String className) {
+        List<TimeTable> resultList = em.createQuery(
+                        "SELECT t FROM TimeTable t " +
+                                "left JOIN FETCH t.member " +
+                                "WHERE t.member.id = :userId " +
+                                "AND t.dayOfWeek = :dayOfWeek " +
+                                "AND ( " +
+                                "  (t.startTime < :endTime AND t.endTime > :startTime) " + // 기존 시간과 겹치는 경우
+                                "  OR t.className = :className " +
+                                ")"
+                        , TimeTable.class)
+                .setParameter("userId", userId)
+                .setParameter("dayOfWeek", dayOfWeek)
+                .setParameter("startTime", startTime)
+                .setParameter("endTime", endTime)
+                .setParameter("className", className)
+                .getResultList();
+
+        return !resultList.isEmpty();
+    }
+
 }

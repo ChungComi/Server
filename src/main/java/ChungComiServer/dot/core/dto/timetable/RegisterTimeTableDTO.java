@@ -2,6 +2,7 @@ package ChungComiServer.dot.core.dto.timetable;
 
 import ChungComiServer.dot.core.enums.DayOfWeek;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,10 +16,10 @@ public class RegisterTimeTableDTO {
     private String className;
     @NotEmpty
     private String professor;
-    @NotEmpty
+    @NotNull
     private DayOfWeek dayOfWeek;
-    @NotEmpty
+    @NotNull
     private LocalDateTime startTime;
-    @NotEmpty
+    @NotNull
     private LocalDateTime endTime;
 }

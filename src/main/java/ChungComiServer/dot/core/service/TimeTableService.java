@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.rmi.AlreadyBoundException;
 import java.time.LocalDateTime;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
@@ -33,7 +34,11 @@ public class TimeTableService {
 
     @Transactional(readOnly = false)
     public Long addClass(Long userId, String className, String professor, DayOfWeek dayOfWeek,
-                         LocalDateTime startTime, LocalDateTime endTime) {
+                         LocalDateTime startTime, LocalDateTime endTime) throws IllegalAccessException {
+        if(timeTableRepository.findIfItsAlreadyRegistered(userId, dayOfWeek, startTime, endTime,className)){
+            throw new IllegalAccessException("이미 추가된 시간표와 겹치는 부분이 있습니다.");
+        }
+        log.info("예외 안터졌을 때");
         Member member = memberRepository.findById(userId);
         TimeTable timeTable = new TimeTable(className,professor,dayOfWeek,startTime,endTime);
         timeTable.addMember(member);
