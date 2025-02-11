@@ -18,7 +18,7 @@ public class MemberApiService {
 
     private final MemberApiRepository memberApiRepository;
 
-    public GetMemberCompaniesDTO findMemberCompaniesById(String memberId) {
+    public GetMemberCompaniesDTO findMemberCompaniesById(Long memberId) {
         Member memberCompanies = memberApiRepository.findMemberCompanies(memberId);
         if(memberCompanies== null)
             throw new NoSuchElementException("멤버가 존재하지 않음");
