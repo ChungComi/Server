@@ -8,6 +8,7 @@ import ChungComiServer.dot.core.service.MemberService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
 import ChungComiServer.dot.global.security.UserContext;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,6 @@ public class MemberApiController {
             return Response.failure(new ErrorCode(e.getMessage()));
         }
     }
-
 
     /**
      * 나의 선호 기업 정보

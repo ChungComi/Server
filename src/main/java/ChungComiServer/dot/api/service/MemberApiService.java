@@ -5,6 +5,7 @@ import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.api.repository.MemberApiRepository;
 import ChungComiServer.dot.core.entity.School;
 import ChungComiServer.dot.core.repository.MemberRepository;
+import ChungComiServer.dot.core.repository.SchoolRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class MemberApiService {
 
     private final MemberApiRepository memberApiRepository;
     private final MemberRepository memberRepository;
+    private final SchoolRepository schoolRepository;
 
     public GetMemberCompaniesDTO findMemberCompaniesById(Long memberId) {
         Member memberCompanies = memberApiRepository.findMemberCompanies(memberId);
@@ -32,6 +34,7 @@ public class MemberApiService {
     @Transactional(readOnly = false)
     public Long registerSchool(Long userId, String name) {
         School school = new School(name);
+        schoolRepository.save(school);
         Member member = memberRepository.findById(userId);
         member.adjustSchool(school);
         return school.getId();
