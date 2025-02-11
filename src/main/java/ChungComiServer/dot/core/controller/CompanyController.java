@@ -54,6 +54,7 @@ CompanyController {
         }
     }
 
+    /** 개발자가 기업 등록 시 사용할 메서드 x **/
     @PostMapping("/sign-up")
     public Response registerCompany(@Valid @RequestBody RegisterInterestDTO registerCompanyDTO, BindingResult result){
         try {
@@ -66,6 +67,7 @@ CompanyController {
         }
     }
 
+    /** 개발자가 기업 정보 변경을 위해 사용할 메서드**/
     @PutMapping("/{companyId}")
     public Response modifyCompanyInfo(@PathVariable("companyId") String companyId,
             @RequestBody @Valid ModifyInterestDTO modifyInterestDTO,BindingResult result){

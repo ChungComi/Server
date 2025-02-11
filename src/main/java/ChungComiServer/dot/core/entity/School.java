@@ -20,4 +20,12 @@ public class School {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "school", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<Member> members = new ArrayList<>();
+
+    protected School(){}
+
+
+    /* 회원 학교 설정 시 학교 객체 생성에 사용하는 함수 */
+    public School(String name){
+        this.name = name;
+    }
 }

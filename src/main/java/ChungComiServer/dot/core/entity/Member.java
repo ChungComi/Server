@@ -46,12 +46,14 @@ public class Member {
     List<Schedule> schedules = new ArrayList<>();
 
     //== 연관관계 편의 메서드 ==//
+    public void adjustSchool(School school){
+        this.school = school;
+        school.getMembers().add(this);
+    }
 
     //== 생성 메서드 ==//
     /** 기본 생성자 메서드 **/
-    public Member() {
-
-    }
+    public Member() {}
 
     /** 회원 가입 생성자 메서드 **/
     @Builder

@@ -13,7 +13,7 @@ public class MemberApiRepository {
 
     private final EntityManager em;
 
-    public Member findMemberCompanies(String memberId) {
+    public Member findMemberCompanies(Long memberId) {
         return em.createQuery("select m from Member m where m.id =:memberId",Member.class)
                 .setParameter("memberId",memberId)
                 .getSingleResult();
