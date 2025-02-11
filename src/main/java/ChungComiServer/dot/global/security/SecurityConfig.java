@@ -55,7 +55,11 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
-                .excludePathPatterns("/auth/**");
+                .excludePathPatterns("/auth/**")
+                .excludePathPatterns("/")
+                .excludePathPatterns("/company/**")
+                .excludePathPatterns("/index.html");
+
     }
 
 }
