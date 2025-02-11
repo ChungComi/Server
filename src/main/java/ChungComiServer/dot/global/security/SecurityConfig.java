@@ -58,8 +58,8 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/auth/**")
                 .excludePathPatterns("/")
                 .excludePathPatterns("/company/**")
+                .excludePathPatterns("/tech-stack/**")
                 .excludePathPatterns("/index.html");
-
     }
 
 }
