@@ -27,9 +27,15 @@ public class MemberService {
     public ResponseMemberDTO findById(String stringMemberId) {
         Long memberId = Long.valueOf(stringMemberId);
         Member foundMember = memberRepository.findById(memberId);
-        if(foundMember == null){
+        if(foundMember == null)
             throw new NoSuchElementException("회원 존재 x");
-        }
+        return new ResponseMemberDTO(foundMember);
+    }
+
+    public ResponseMemberDTO findById(Long memberId) {
+        Member foundMember = memberRepository.findById(memberId);
+        if(foundMember == null)
+            throw new NoSuchElementException("회원 존재 x");
         return new ResponseMemberDTO(foundMember);
     }
 
