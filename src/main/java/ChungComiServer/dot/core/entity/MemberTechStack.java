@@ -23,4 +23,13 @@ public class MemberTechStack {
 
     @Column(name = "PREFERENCE")
     private Long preference;
+
+    // == 연관관계 편의 메서드 ==//
+    public MemberTechStack adjustInterestTechStackMember(Member member, TechStack techStack){
+        this.member = member;
+        this.techStack = techStack;
+        member.getMemberTechStacks().add(this);
+        techStack.getMemberTechStacks().add(this);
+        return this;
+    }
 }

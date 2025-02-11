@@ -24,4 +24,13 @@ public class MemberCompany {
     @Column(name = "PREFERENCE")
     private Long preference;
 
+    // == 연관관계 편의 메서드 ==//
+    public MemberCompany adjustInterestCompanyInMember(Member member, Company company){
+        this.member = member;
+        this.company = company;
+        member.getMemberCompanies().add(this);
+        company.getMemberCompanies().add(this);
+        return this;
+    }
+
 }
