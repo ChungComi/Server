@@ -19,10 +19,9 @@ public class AuthService {
 
 
     public Long login(String loginID, String loginPW) {
-        Member member = memberRepository.findByLoginId(loginID);
-        if(member != null && passwordUtil.matches(member.getLoginPw(),loginPW)){
-            return member.getId();
-        }
+        String foundPw = memberRepository.findPwByLoginId(loginID);
+        if(foundPw != null && passwordUtil.matches(foundPw,loginPW))
+            return Long.valueOf(loginID);
         return null;
     }
 
