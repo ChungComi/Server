@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 public class ResponsePostDTOForBoard {
 
+    private Long id;
     private String title;
     private String memberName;
     private Long likes;
@@ -17,6 +18,7 @@ public class ResponsePostDTOForBoard {
     private LocalDateTime registeredAt;
 
     public ResponsePostDTOForBoard(Post post){
+        this.id = post.getId();
         this.title = post.getTitle();
         this.likes = post.getLikes();
         this.views = post.getViews();
