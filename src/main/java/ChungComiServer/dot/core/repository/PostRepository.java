@@ -33,7 +33,7 @@ public class PostRepository {
     }
 
     public List<Post> findByTitle(String postTitle) {
-        return em.createQuery("select p from Post p left join fetch p.comments where p.title like :postTitle", Post.class)
+        return em.createQuery("select p from Post p where p.title like :postTitle", Post.class)
                 .setParameter("postTitle",postTitle)
                 .getResultList();
     }

@@ -42,6 +42,7 @@ public class PostService {
     }
 
     public List<ResponsePostDTOForBoard> findByTitle(String postTitle) {
+        postTitle = "%"+postTitle+"%";
         List<Post> posts = postRepository.findByTitle(postTitle);
         if(posts.isEmpty())
             throw new NoSuchElementException("해당 게시물이 존재하지 않습니다.");

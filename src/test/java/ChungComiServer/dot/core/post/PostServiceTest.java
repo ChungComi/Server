@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.post;
 
+import ChungComiServer.dot.api.dto.ResponsePostDTOForBoard;
 import ChungComiServer.dot.core.ServiceTest;
 import ChungComiServer.dot.core.dto.post.ResponsePostDTO;
 import ChungComiServer.dot.core.entity.Post;
@@ -95,8 +96,8 @@ public class PostServiceTest extends ServiceTest {
             }
 
             //then
-            Assertions.assertThat(postService.findByTitle(title)).extracting(ResponsePostDTO::getContent)
-                    .containsExactlyInAnyOrder(posts.stream().map(Post::getContent).toArray(String[]::new));
+            Assertions.assertThat(postService.findByTitle(title)).extracting(ResponsePostDTOForBoard::getTitle)
+                    .containsExactlyInAnyOrder(posts.stream().map(Post::getTitle).toArray(String[]::new));
         }
 
         private static Stream<Arguments> generateArguments(){
