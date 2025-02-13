@@ -21,9 +21,9 @@ public class PostRepository {
                 .getResultList();
     }
 
-    public Integer findALlPostsNum(){
+    public List<Post> findALlWithoutCommentsPosts(){
         return em.createQuery("select p from Post p", Post.class)
-                .getResultList().size();
+                .getResultList();
     }
 
     public Post findById(Long postId) {
