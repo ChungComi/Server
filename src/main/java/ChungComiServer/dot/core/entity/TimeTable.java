@@ -1,6 +1,7 @@
 package ChungComiServer.dot.core.entity;
 
 import ChungComiServer.dot.core.enums.DayOfWeek;
+import ChungComiServer.dot.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -10,7 +11,7 @@ import java.util.InvalidPropertiesFormatException;
 @Entity
 @Getter
 @Table(name = "TIMETABLE")
-public class TimeTable {
+public class TimeTable extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "TIMETABLE_ID")

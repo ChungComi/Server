@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.entity;
 
+import ChungComiServer.dot.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "POST")
-public class Post {
+public class Post extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "POST_ID")

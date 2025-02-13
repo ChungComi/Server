@@ -3,6 +3,7 @@ package ChungComiServer.dot.core.entity;
 import ChungComiServer.dot.core.entity.interest.Company;
 import ChungComiServer.dot.core.entity.interest.Interest;
 import ChungComiServer.dot.core.entity.interest.TechStack;
+import ChungComiServer.dot.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "COMMENT")
-public class Comment {
+public class Comment extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "COMMENT_ID")
