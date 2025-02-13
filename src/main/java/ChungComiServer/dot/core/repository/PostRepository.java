@@ -21,6 +21,11 @@ public class PostRepository {
                 .getResultList();
     }
 
+    public Integer findALlPostsNum(){
+        return em.createQuery("select p from Post p", Post.class)
+                .getResultList().size();
+    }
+
     public Post findById(Long postId) {
         return em.find(Post.class,postId);
     }

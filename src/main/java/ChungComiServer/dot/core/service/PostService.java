@@ -54,6 +54,10 @@ public class PostService {
         return posts.stream().map(ResponsePostDTO::new).toList();
     }
 
+    public Integer findAllPostsNum(){
+        return postRepository.findALlPostsNum();
+    }
+
     @Transactional(readOnly = false)
     public Long registerPost(Long userId, String title, String content) throws InvalidPropertiesFormatException {
         Member member = memberRepository.findById(userId);
