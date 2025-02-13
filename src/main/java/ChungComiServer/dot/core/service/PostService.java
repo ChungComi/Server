@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.service;
 
+import ChungComiServer.dot.api.dto.ResponsePostDTOForBoard;
 import ChungComiServer.dot.core.dto.post.ResponsePostDTO;
 import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.entity.Post;
@@ -46,12 +47,12 @@ public class PostService {
         return posts.stream().map(ResponsePostDTO::new).toList();
     }
 
-    public List<ResponsePostDTO> findByPageNum(String stringPageNum){
+    public List<ResponsePostDTOForBoard> findByPageNum(String stringPageNum){
         Integer firstPostNum = getFirstPostNum(stringPageNum);
         List<Post> posts = postRepository.findByFirstPostNum(firstPostNum);
         if(posts.isEmpty())
             throw new NoSuchElementException("게시물이 존재하지 않습니다.");
-        return posts.stream().map(ResponsePostDTO::new).toList();
+        return posts.stream().map(ResponsePostDTOForBoard::new).toList();
     }
 
     public Integer findAllPostsNum(){

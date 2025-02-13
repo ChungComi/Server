@@ -37,7 +37,7 @@ public class PostRepository {
     }
 
     public List<Post> findByFirstPostNum(Integer firstPost){
-        return em.createQuery("select p from Post p left join p.comments",Post.class)
+        return em.createQuery("select p from Post p",Post.class)
                 .setFirstResult(firstPost)
                 .setMaxResults(PostRepository.MAX_RESULT)
                 .getResultList();

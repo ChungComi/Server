@@ -1,5 +1,6 @@
 package ChungComiServer.dot.api.controller;
 
+import ChungComiServer.dot.api.dto.ResponsePostDTOForBoard;
 import ChungComiServer.dot.core.dto.post.ResponsePostDTO;
 import ChungComiServer.dot.core.service.PostService;
 import ChungComiServer.dot.global.response.ErrorCode;
@@ -26,7 +27,7 @@ public class PostAPIController {
     @GetMapping("/{pageNum}")
     public Response getPostsByPageNumb(@PathVariable("pageNum")String pageNum){
         try{
-            List<ResponsePostDTO> postsDTOs = postService.findByPageNum(pageNum);
+            List<ResponsePostDTOForBoard> postsDTOs = postService.findByPageNum(pageNum);
             return Response.success(postsDTOs);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
