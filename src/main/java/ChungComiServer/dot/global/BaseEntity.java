@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class BaseEntity {
 
-    LocalDateTime registerDate;
-    LocalDateTime modifiedDate;
+    protected LocalDateTime registerDate;
+    protected LocalDateTime modifiedDate;
 }
