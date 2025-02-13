@@ -32,6 +32,15 @@ public class MemberApiController {
         }
     }
 
+    @GetMapping("/onlyId")
+    public Response getMyId(){
+        try{
+            return Response.success(userContext.getUserId());
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
     @PostMapping("/school")
     public Response registerSchool(@RequestBody SchoolDTO schoolDTO){
         try{

@@ -35,16 +35,6 @@ public class PostController {
         }
     }
 
-    @GetMapping("/{postId}")
-    public Response getPostById(@PathVariable("postId") String postId){
-        try{
-            ResponsePostDTO postDTO = postService.findById(postId);
-            return Response.success(postDTO);
-        }catch (Exception e){
-            return Response.failure(new ErrorCode(e.getMessage()));
-        }
-    }
-
     @GetMapping("/title/{postTitle}")
     public Response getPostByTitle(@PathVariable("postTitle") String postTitle){
         try{

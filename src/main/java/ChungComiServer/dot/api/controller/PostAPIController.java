@@ -24,7 +24,7 @@ public class PostAPIController {
     private final PostService postService;
     private final UserContext userContext;
 
-    @GetMapping("/{pageNum}")
+    @GetMapping("/page/{pageNum}")
     public Response getPostsByPageNumb(@PathVariable("pageNum")String pageNum){
         try{
             List<ResponsePostDTOForBoard> postsDTOs = postService.findByPageNum(pageNum);
@@ -40,6 +40,16 @@ public class PostAPIController {
             Integer postsNum = postService.findAllPostsNum();
             return Response.success(postsNum);
         } catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @GetMapping("/{postId}")
+    public Response getPostById(@PathVariable("postId") String postId){
+        try{
+            ResponsePostDTO postDTO = postService.findById(postId);
+            return Response.success(postDTO);
+        }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }
     }
