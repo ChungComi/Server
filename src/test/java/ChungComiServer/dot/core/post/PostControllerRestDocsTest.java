@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.post;
 
+import ChungComiServer.dot.api.dto.ResponsePostDTOForBoard;
 import ChungComiServer.dot.core.controller.PostController;
 import ChungComiServer.dot.core.dto.post.ResponsePostDTO;
 import ChungComiServer.dot.core.entity.Post;
@@ -14,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
@@ -70,10 +72,10 @@ public class PostControllerRestDocsTest {
     @Test
     public void 제목을_통해_특정_게시물_조회() throws Exception{
         //given
-        List<ResponsePostDTO> posts = List.of(
-                new ResponsePostDTO(new Post("title2", "content")),
-                new ResponsePostDTO(new Post("title2", "content2")),
-                new ResponsePostDTO(new Post("title2", "content3"))
+        List<ResponsePostDTOForBoard> posts = List.of(
+                new ResponsePostDTOForBoard(new Post("title2", "content")),
+                new ResponsePostDTOForBoard(new Post("title2", "content2")),
+                new ResponsePostDTOForBoard(new Post("title2", "content3"))
         );
         when(postService.findByTitle("title2")).thenReturn(posts);
         //when
@@ -110,7 +112,7 @@ public class PostControllerRestDocsTest {
     public void 게시물_수정() throws Exception {
         //given
         ResponsePostDTO post = new ResponsePostDTO(Post.builder().title("title2").content("content2").build());
-        when(postService.modifyPost(null, "1","title2","content2"))
+        when(postService.modifyPost(null, "1","title2","content2", LocalDateTime.now()))
                 .thenReturn(post);
         //when
         this.mockMvc.perform(put("/post/{postId}",1)

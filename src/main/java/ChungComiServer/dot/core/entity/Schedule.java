@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.entity;
 
+import ChungComiServer.dot.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +12,7 @@ import java.util.InvalidPropertiesFormatException;
 @Slf4j
 @Getter
 @Table(name = "SCHEDULE")
-public class Schedule {
+public class Schedule extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "SCHEDULE_ID")

@@ -1,9 +1,11 @@
 package ChungComiServer.dot.core.entity;
 
+import ChungComiServer.dot.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "POST")
-public class Post {
+public class Post extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "POST_ID")
@@ -46,16 +48,18 @@ public class Post {
         validateContent(content);
         this.title = title;
         this.content = content;
+        this.registerDate = LocalDateTime.now();
     }
 
     /** 게시글 수정을 위한 메서드 **/
-    public void modifyPost(Long userId, String title, String content) throws InvalidPropertiesFormatException, IllegalAccessException {
+    public void modifyPost(Long userId, String title, String content, LocalDateTime modifiedAt) throws InvalidPropertiesFormatException, IllegalAccessException {
         if(!member.getId().equals(userId))
             throw new IllegalAccessException("게시물 작성자만 수정이 가능합니다.");
         validateTitle(title);
         validateContent(content);
         this.title = title;
         this.content = content;
+        this.modifiedDate = modifiedAt;
     }
 
     //== 비즈니스 로직 ==//

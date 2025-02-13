@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.controller;
 
+import ChungComiServer.dot.api.dto.ResponsePostDTOForBoard;
 import ChungComiServer.dot.core.dto.auth.RegisterDTO;
 import ChungComiServer.dot.core.dto.post.ModifyPostDTO;
 import ChungComiServer.dot.core.dto.post.RegisterPostDTO;
@@ -35,20 +36,20 @@ public class PostController {
         }
     }
 
-    @GetMapping("/{postId}")
-    public Response getPostById(@PathVariable("postId") String postId){
+    @GetMapping("/title/{postTitle}")
+    public Response getPostByTitle(@PathVariable("postTitle") String postTitle){
         try{
-            ResponsePostDTO postDTO = postService.findById(postId);
-            return Response.success(postDTO);
+            List<ResponsePostDTOForBoard> postDTOs = postService.findByTitle(postTitle);
+            return Response.success(postDTOs);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }
     }
 
-    @GetMapping("/title/{postTitle}")
-    public Response getPostByTitle(@PathVariable("postTitle") String postTitle){
+    @GetMapping("/member/{memberName}")
+    public Response getPostByMember(@PathVariable("memberName") String memberName){
         try{
-            List<ResponsePostDTO> postDTOs = postService.findByTitle(postTitle);
+            List<ResponsePostDTOForBoard> postDTOs = postService.findByMember(memberName);
             return Response.success(postDTOs);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
@@ -70,7 +71,7 @@ public class PostController {
     @PutMapping("/{postId}")
     public Response modifyPost(@PathVariable("postId") String postId, @RequestBody ModifyPostDTO modifyPostDTO){
         try{
-            ResponsePostDTO responsePostDTO = postService.modifyPost(userContext.getUserId(), postId, modifyPostDTO.getTitle(), modifyPostDTO.getContent());
+            ResponsePostDTO responsePostDTO = postService.modifyPost(userContext.getUserId(), postId, modifyPostDTO.getTitle(), modifyPostDTO.getContent(), modifyPostDTO.getModifiedAt());
             return Response.success(responsePostDTO);
         } catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));

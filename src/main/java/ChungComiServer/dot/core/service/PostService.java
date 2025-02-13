@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.service;
 
+import ChungComiServer.dot.api.dto.ResponsePostDTOForBoard;
 import ChungComiServer.dot.core.dto.post.ResponsePostDTO;
 import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.entity.Post;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -39,11 +41,32 @@ public class PostService {
         return new ResponsePostDTO(post);
     }
 
-    public List<ResponsePostDTO> findByTitle(String postTitle) {
+    public List<ResponsePostDTOForBoard> findByTitle(String postTitle) {
+        postTitle = "%"+postTitle+"%";
         List<Post> posts = postRepository.findByTitle(postTitle);
         if(posts.isEmpty())
             throw new NoSuchElementException("해당 게시물이 존재하지 않습니다.");
-        return posts.stream().map(ResponsePostDTO::new).toList();
+        return posts.stream().map(ResponsePostDTOForBoard::new).toList();
+    }
+
+    public List<ResponsePostDTOForBoard> findByMember(String memberName) {
+        memberName = "%"+memberName+"%";
+        List<Post> posts = postRepository.findByMemberName(memberName);
+        if(posts.isEmpty())
+            throw new NoSuchElementException("해당 게시물이 존재하지 않습니다.");
+        return posts.stream().map(ResponsePostDTOForBoard::new).toList();
+    }
+
+    public List<ResponsePostDTOForBoard> findByPageNum(String stringPageNum){
+        Integer firstPostNum = getFirstPostNum(stringPageNum);
+        List<Post> posts = postRepository.findByFirstPostNum(firstPostNum);
+        if(posts.isEmpty())
+            throw new NoSuchElementException("게시물이 존재하지 않습니다.");
+        return posts.stream().map(ResponsePostDTOForBoard::new).toList();
+    }
+
+    public Integer findAllPostsNum(){
+        return postRepository.findALlWithoutCommentsPosts().size();
     }
 
     @Transactional(readOnly = false)
@@ -55,10 +78,10 @@ public class PostService {
     }
 
     @Transactional(readOnly = false)
-    public ResponsePostDTO modifyPost(Long userId, String stringPostId, String title, String content) throws InvalidPropertiesFormatException, IllegalAccessException {
+    public ResponsePostDTO modifyPost(Long userId, String stringPostId, String title, String content, LocalDateTime modifiedAt) throws InvalidPropertiesFormatException, IllegalAccessException {
         Long postId = Long.valueOf(stringPostId);
         Post post = postRepository.findById(postId);
-        post.modifyPost(userId,title,content);
+        post.modifyPost(userId,title,content,modifiedAt);
         return new ResponsePostDTO(post);
     }
 
@@ -70,4 +93,10 @@ public class PostService {
             postRepository.deletePost(postId);
         else throw new IllegalAccessException("게시물 작성자만 삭제가 가능합니다.");
     }
+
+    private static Integer getFirstPostNum(String stringPageNum) {
+        int pageNum = Integer.parseInt(stringPageNum);
+        return (pageNum-1)*10;
+    }
+
 }

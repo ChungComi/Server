@@ -1,13 +1,14 @@
 package ChungComiServer.dot.core.entity;
 
 import ChungComiServer.dot.core.entity.interest.Company;
+import ChungComiServer.dot.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
 @Getter
 @Table(name = "MEMBERCOMPANY")
-public class MemberCompany {
+public class MemberCompany extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "MEMBERCOMPANY_ID")
