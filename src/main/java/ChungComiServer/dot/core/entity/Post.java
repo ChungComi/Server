@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
@@ -47,6 +48,7 @@ public class Post extends BaseEntity {
         validateContent(content);
         this.title = title;
         this.content = content;
+        this.registerDate = LocalDateTime.now();
     }
 
     /** 게시글 수정을 위한 메서드 **/
