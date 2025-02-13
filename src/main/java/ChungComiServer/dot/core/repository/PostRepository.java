@@ -27,7 +27,9 @@ public class PostRepository {
     }
 
     public Post findById(Long postId) {
-        return em.find(Post.class,postId);
+        return em.createQuery("select p from Post p left join fetch p.comments where p.id =:postId",Post.class)
+                .setParameter("postId",postId)
+                .getSingleResult();
     }
 
     public List<Post> findByTitle(String postTitle) {
