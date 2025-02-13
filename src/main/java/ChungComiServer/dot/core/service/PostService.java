@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -68,10 +69,10 @@ public class PostService {
     }
 
     @Transactional(readOnly = false)
-    public ResponsePostDTO modifyPost(Long userId, String stringPostId, String title, String content) throws InvalidPropertiesFormatException, IllegalAccessException {
+    public ResponsePostDTO modifyPost(Long userId, String stringPostId, String title, String content, LocalDateTime modifiedAt) throws InvalidPropertiesFormatException, IllegalAccessException {
         Long postId = Long.valueOf(stringPostId);
         Post post = postRepository.findById(postId);
-        post.modifyPost(userId,title,content);
+        post.modifyPost(userId,title,content,modifiedAt);
         return new ResponsePostDTO(post);
     }
 

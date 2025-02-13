@@ -60,7 +60,7 @@ public class PostController {
     @PutMapping("/{postId}")
     public Response modifyPost(@PathVariable("postId") String postId, @RequestBody ModifyPostDTO modifyPostDTO){
         try{
-            ResponsePostDTO responsePostDTO = postService.modifyPost(userContext.getUserId(), postId, modifyPostDTO.getTitle(), modifyPostDTO.getContent());
+            ResponsePostDTO responsePostDTO = postService.modifyPost(userContext.getUserId(), postId, modifyPostDTO.getTitle(), modifyPostDTO.getContent(), modifyPostDTO.getModifiedAt());
             return Response.success(responsePostDTO);
         } catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
