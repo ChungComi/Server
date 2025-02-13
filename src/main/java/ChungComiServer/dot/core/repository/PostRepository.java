@@ -14,6 +14,7 @@ import java.util.List;
 public class PostRepository {
 
     private final EntityManager em;
+    private static final Integer MAX_RESULT = 10;
 
     public List<Post> findAll() {
         return em.createQuery("select p from Post p left join fetch p.comments", Post.class)
@@ -27,6 +28,13 @@ public class PostRepository {
     public List<Post> findByTitle(String postTitle) {
         return em.createQuery("select p from Post p left join fetch p.comments where p.title like :postTitle", Post.class)
                 .setParameter("postTitle",postTitle)
+                .getResultList();
+    }
+
+    public List<Post> findByFirstPostNum(Integer firstPost){
+        return em.createQuery("select p from Post p left join p.comments",Post.class)
+                .setFirstResult(firstPost)
+                .setMaxResults(PostRepository.MAX_RESULT)
                 .getResultList();
     }
 

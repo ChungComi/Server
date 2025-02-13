@@ -46,6 +46,14 @@ public class PostService {
         return posts.stream().map(ResponsePostDTO::new).toList();
     }
 
+    public List<ResponsePostDTO> findByPageNum(String stringPageNum){
+        Integer firstPostNum = getFirstPostNum(stringPageNum);
+        List<Post> posts = postRepository.findByFirstPostNum(firstPostNum);
+        if(posts.isEmpty())
+            throw new NoSuchElementException("게시물이 존재하지 않습니다.");
+        return posts.stream().map(ResponsePostDTO::new).toList();
+    }
+
     @Transactional(readOnly = false)
     public Long registerPost(Long userId, String title, String content) throws InvalidPropertiesFormatException {
         Member member = memberRepository.findById(userId);
@@ -70,4 +78,10 @@ public class PostService {
             postRepository.deletePost(postId);
         else throw new IllegalAccessException("게시물 작성자만 삭제가 가능합니다.");
     }
+
+    private static Integer getFirstPostNum(String stringPageNum) {
+        int pageNum = Integer.parseInt(stringPageNum);
+        return (pageNum-1)*10;
+    }
+
 }
