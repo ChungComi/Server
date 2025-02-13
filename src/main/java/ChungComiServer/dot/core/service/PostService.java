@@ -41,11 +41,11 @@ public class PostService {
         return new ResponsePostDTO(post);
     }
 
-    public List<ResponsePostDTO> findByTitle(String postTitle) {
+    public List<ResponsePostDTOForBoard> findByTitle(String postTitle) {
         List<Post> posts = postRepository.findByTitle(postTitle);
         if(posts.isEmpty())
             throw new NoSuchElementException("해당 게시물이 존재하지 않습니다.");
-        return posts.stream().map(ResponsePostDTO::new).toList();
+        return posts.stream().map(ResponsePostDTOForBoard::new).toList();
     }
 
     public List<ResponsePostDTOForBoard> findByPageNum(String stringPageNum){

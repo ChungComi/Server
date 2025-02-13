@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.controller;
 
+import ChungComiServer.dot.api.dto.ResponsePostDTOForBoard;
 import ChungComiServer.dot.core.dto.auth.RegisterDTO;
 import ChungComiServer.dot.core.dto.post.ModifyPostDTO;
 import ChungComiServer.dot.core.dto.post.RegisterPostDTO;
@@ -38,7 +39,7 @@ public class PostController {
     @GetMapping("/title/{postTitle}")
     public Response getPostByTitle(@PathVariable("postTitle") String postTitle){
         try{
-            List<ResponsePostDTO> postDTOs = postService.findByTitle(postTitle);
+            List<ResponsePostDTOForBoard> postDTOs = postService.findByTitle(postTitle);
             return Response.success(postDTOs);
         }catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
