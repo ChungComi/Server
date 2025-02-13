@@ -49,6 +49,14 @@ public class PostService {
         return posts.stream().map(ResponsePostDTOForBoard::new).toList();
     }
 
+    public List<ResponsePostDTOForBoard> findByMember(String memberName) {
+        memberName = "%"+memberName+"%";
+        List<Post> posts = postRepository.findByMemberName(memberName);
+        if(posts.isEmpty())
+            throw new NoSuchElementException("해당 게시물이 존재하지 않습니다.");
+        return posts.stream().map(ResponsePostDTOForBoard::new).toList();
+    }
+
     public List<ResponsePostDTOForBoard> findByPageNum(String stringPageNum){
         Integer firstPostNum = getFirstPostNum(stringPageNum);
         List<Post> posts = postRepository.findByFirstPostNum(firstPostNum);

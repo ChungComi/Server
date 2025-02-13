@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
@@ -128,7 +129,7 @@ public class PostServiceTest extends ServiceTest {
             Long registeredId = postService.registerPost(null,post.getTitle(), post.getContent());
 
             //then
-            Assertions.assertThat(postService.modifyPost(null, String.valueOf(registeredId),title,content))
+            Assertions.assertThat(postService.modifyPost(null, String.valueOf(registeredId),title,content, LocalDateTime.now()))
                     .usingRecursiveComparison()
                     .isEqualTo(new ResponsePostDTO((new Post(title,content))));
         }
@@ -144,7 +145,7 @@ public class PostServiceTest extends ServiceTest {
 
             //Expect
             org.junit.jupiter.api.Assertions.assertThrows(InvalidPropertiesFormatException.class,()->
-                    postService.modifyPost(null, String.valueOf(registeredId),title,content));
+                    postService.modifyPost(null, String.valueOf(registeredId),title,content,LocalDateTime.now()));
         }
 
         @Test

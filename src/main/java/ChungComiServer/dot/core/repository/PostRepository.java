@@ -38,6 +38,12 @@ public class PostRepository {
                 .getResultList();
     }
 
+    public List<Post> findByMemberName(String memberName) {
+        return em.createQuery("select p from Post p join fetch p.member where p.member.name like :memberName", Post.class)
+                .setParameter("memberName",memberName)
+                .getResultList();
+    }
+
     public List<Post> findByFirstPostNum(Integer firstPost){
         return em.createQuery("select p from Post p",Post.class)
                 .setFirstResult(firstPost)

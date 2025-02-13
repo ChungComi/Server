@@ -46,6 +46,16 @@ public class PostController {
         }
     }
 
+    @GetMapping("/member/{memberName}")
+    public Response getPostByMember(@PathVariable("memberName") String memberName){
+        try{
+            List<ResponsePostDTOForBoard> postDTOs = postService.findByMember(memberName);
+            return Response.success(postDTOs);
+        }catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
     @PostMapping("")
     public Response registerPost(@Valid @RequestBody RegisterPostDTO registerPostDTO, BindingResult result){
         try{
