@@ -24,7 +24,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             try{
                 String userId = jwtUtil.validateToken(token.replace("Bearer",""));
                 userContext.saveUserIdAtInterceptor(userId);
-                log.info("Jwt에서 뽑아온 회원 id={}",userContext.getUserId());
+//                log.info("Jwt에서 뽑아온 회원 id={}",userContext.getUserId());
             }catch (Exception e){
                 log.info("JWT 토큰 인증 실패");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

@@ -16,8 +16,8 @@ public class MemberRepository {
     private final EntityManager em;
 
     /** 회원 ID로 DB에서 찾는 메서드 **/
-    public String findPwByLoginId(String loginID) {
-        return em.createQuery("select m.loginPw from Member m where m.loginId = :loginId", String.class)
+    public Member findByLoginId(String loginID) {
+        return em.createQuery("select m from Member m where m.loginId = :loginId", Member.class)
                 .setParameter("loginId", loginID)
                 .getSingleResult();
     }
