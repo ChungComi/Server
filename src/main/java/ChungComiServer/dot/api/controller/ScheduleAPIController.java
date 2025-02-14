@@ -20,21 +20,21 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/schedule")
+@RequestMapping("/api/schedule")
 @RequiredArgsConstructor
 public class ScheduleAPIController {
 
     private final ScheduleService scheduleService;
     private final UserContext userContext;
 
-    @GetMapping("")
-    public Response getSchedulesOfTheDate(LocalDateTime date){
+    @GetMapping("{selectedDate}")
+    public Response getSchedulesOfTheDate(@PathVariable("selectedDate") LocalDateTime date){
         try{
+            log.info("@@@@@이거야?");
             List<ResponseIdScheduleDTO> responseIdScheduleDTOs = scheduleService.getSchedulesOfTheDate(userContext.getUserId(), date);
             return Response.success(responseIdScheduleDTOs);
         } catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }
     }
-
 }
