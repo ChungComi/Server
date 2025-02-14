@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -28,8 +29,8 @@ public class ScheduleController {
     @GetMapping("/{month}")
     public Response getAllSchedulesOfTheMonth(@PathVariable("month") Month month){
         try{
-            List<ResponseScheduleDTO> responseScheduleDTOs = scheduleService.getAllSchedulesOfTheMonth(userContext.getUserId(), month);
-            return Response.success(responseScheduleDTOs);
+            List<LocalDateTime> schedulesDates = scheduleService.getAllSchedulesOfTheMonth(userContext.getUserId(), month);
+            return Response.success(schedulesDates);
         } catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
         }

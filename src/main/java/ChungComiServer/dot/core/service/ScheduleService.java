@@ -25,10 +25,9 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final MemberRepository memberRepository;
 
-    public List<ResponseScheduleDTO> getAllSchedulesOfTheMonth(Long userId, Month month) {
+    public List<LocalDateTime> getAllSchedulesOfTheMonth(Long userId, Month month) {
         int ordinalMonth = month.getMonthNumber();
-        List<Schedule> schedules = scheduleRepository.getAllSchedulesOfTheMonth(userId, ordinalMonth);
-        return schedules.stream().map(ResponseScheduleDTO::new).toList();
+        return scheduleRepository.getAllSchedulesOfTheMonth(userId, ordinalMonth);
     }
 
     @Transactional(readOnly = false)

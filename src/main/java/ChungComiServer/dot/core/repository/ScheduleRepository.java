@@ -16,8 +16,8 @@ public class ScheduleRepository {
 
     private final EntityManager em;
 
-    public List<Schedule> getAllSchedulesOfTheMonth(Long userId, int month) {
-        return em.createQuery("select s from Schedule s where function('MONTH',s.date) =:month and s.member.id =:userId",Schedule.class)
+    public List<LocalDateTime> getAllSchedulesOfTheMonth(Long userId, int month) {
+        return em.createQuery("select s.date from Schedule s where function('MONTH',s.date) =:month and s.member.id =:userId", LocalDateTime.class)
                 .setParameter("month", month)
                 .setParameter("userId",userId)
                 .getResultList();
