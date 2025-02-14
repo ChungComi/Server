@@ -30,7 +30,6 @@ public class ScheduleAPIController {
     @GetMapping("{selectedDate}")
     public Response getSchedulesOfTheDate(@PathVariable("selectedDate") LocalDateTime date){
         try{
-            log.info("@@@@@이거야?");
             List<ResponseIdScheduleDTO> responseIdScheduleDTOs = scheduleService.getSchedulesOfTheDate(userContext.getUserId(), date);
             return Response.success(responseIdScheduleDTOs);
         } catch (Exception e){
