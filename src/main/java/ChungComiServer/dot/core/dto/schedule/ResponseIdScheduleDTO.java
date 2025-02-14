@@ -11,11 +11,9 @@ import java.time.LocalDateTime;
 public class ResponseIdScheduleDTO {
     private Long id;
     private String content;
-    private LocalDateTime date;
 
     public ResponseIdScheduleDTO(Schedule schedule){
         this.id = schedule.getId();
         this.content = schedule.getContent();
-        this.date = schedule.getDate();
     }
 }
