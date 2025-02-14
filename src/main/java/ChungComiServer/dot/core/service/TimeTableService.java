@@ -55,8 +55,8 @@ public class TimeTableService {
     @Transactional(readOnly = false)
     public void deleteTimeTable(Long userId, String stringTimeTableId) throws IllegalAccessException {
         Long timeTableId = Long.valueOf(stringTimeTableId);
-        if(!timeTableRepository.findById(timeTableId).getMember().getId().equals(userId))
-            throw new IllegalAccessException("일정 작성자만 삭제 가능합니다.");
+//        if(!timeTableRepository.findById(timeTableId).getMember().getId().equals(userId))
+//            throw new IllegalAccessException("일정 작성자만 삭제 가능합니다.");
         timeTableRepository.delete(timeTableId);
     }
 }
