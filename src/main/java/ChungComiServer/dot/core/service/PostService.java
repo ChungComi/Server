@@ -66,7 +66,7 @@ public class PostService {
     }
 
     public Integer findAllPostsNum(){
-        return postRepository.findALlWithoutCommentsPosts().size();
+        return postRepository.findALlWithoutCommentsPosts();
     }
 
     @Transactional(readOnly = false)
