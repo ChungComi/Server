@@ -17,7 +17,7 @@ public class PostRepository {
     private static final Integer MAX_RESULT = 10;
 
     public List<Post> findAll() {
-        return em.createQuery("select p from Post p left join fetch p.comments", Post.class)
+        return em.createQuery("select p from Post p left join fetch p.member", Post.class)
                 .getResultList();
     }
 
