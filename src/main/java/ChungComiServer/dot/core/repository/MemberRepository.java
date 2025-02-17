@@ -39,7 +39,9 @@ public class MemberRepository {
     /** @Param: 회원 ID
      * @Return: 회원 객체 **/
     public Member findById(Long memberId) {
-        return em.find(Member.class,memberId);
+        return em.createQuery("select m from Member m left join fetch m.school where m.id =:memberId",Member.class)
+                .setParameter("memberId",memberId)
+                .getSingleResult();
     }
 
     /** @Param: 회원 이름
