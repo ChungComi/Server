@@ -27,13 +27,13 @@ public class PostRepository {
     }
 
     public Post findById(Long postId) {
-        return em.createQuery("select p from Post p left join fetch p.comments where p.id =:postId",Post.class)
+        return em.createQuery("select p from Post p left join fetch p.member where p.id =:postId",Post.class)
                 .setParameter("postId",postId)
                 .getSingleResult();
     }
 
     public List<Post> findByTitle(String postTitle) {
-        return em.createQuery("select p from Post p where p.title like :postTitle", Post.class)
+        return em.createQuery("select p from Post p left join fetch p.member where p.title like :postTitle", Post.class)
                 .setParameter("postTitle",postTitle)
                 .getResultList();
     }
