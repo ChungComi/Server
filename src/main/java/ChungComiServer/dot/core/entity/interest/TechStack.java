@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,11 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class TechStack extends Interest{
 
+    @BatchSize(size = 10)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "techStack" )
     List<MemberTechStack> memberTechStacks = new ArrayList<>();
 
+    @BatchSize(size = 20)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "techStack", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Comment> comments = new ArrayList<>();
 

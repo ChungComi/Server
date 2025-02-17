@@ -5,6 +5,7 @@ import ChungComiServer.dot.core.entity.MemberCompany;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +15,11 @@ import java.util.List;
 @Table(name = "COMPANY")
 public class Company extends Interest{
 
+    @BatchSize(size = 10)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private List<MemberCompany> memberCompanies = new ArrayList<>();
 
+    @BatchSize(size = 20)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 

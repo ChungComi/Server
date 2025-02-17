@@ -31,12 +31,12 @@ public class Member extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<Post> posts;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @BatchSize(size = 10)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<MemberCompany> memberCompanies = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @BatchSize(size = 10)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<MemberTechStack> memberTechStacks = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
