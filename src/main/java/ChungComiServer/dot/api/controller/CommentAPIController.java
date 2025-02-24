@@ -29,7 +29,7 @@ public class CommentAPIController {
         }
     }
 
-    @PostMapping("/{commentId}")
+    @PostMapping("/child/{commentId}")
     public Response registerChildComments(@PathVariable Long commentId, @RequestBody String content) {
         try {
             commentService.registerChildComment(userContext.getUserId(), commentId, content);
