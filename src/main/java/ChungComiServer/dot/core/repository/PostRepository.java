@@ -45,7 +45,7 @@ public class PostRepository {
     }
 
     public List<Post> findByFirstPostNum(Integer firstPost){
-        return em.createQuery("select p from Post p",Post.class)
+        return em.createQuery("select p from Post p join fetch p.member",Post.class)
                 .setFirstResult(firstPost)
                 .setMaxResults(PostRepository.MAX_RESULT)
                 .getResultList();
