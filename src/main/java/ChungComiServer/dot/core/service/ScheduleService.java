@@ -51,7 +51,7 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(scheduleId);
         if(!schedule.getMember().getId().equals(userId))
             throw new IllegalAccessException("일정 작성자만 삭제 가능합니다.");
-        scheduleRepository.deleteSchedule(scheduleId);
+        scheduleRepository.deleteSchedule(schedule);
     }
 
     public List<ResponseIdScheduleDTO> getSchedulesOfTheDate(Long userId, LocalDateTime date) {

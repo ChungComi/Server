@@ -93,7 +93,7 @@ public class PostService {
         Long postId = Long.valueOf(stringPostId);
         Post post = postRepository.findById(postId);
         if(post.getMember().getId().equals(userId))
-            postRepository.deletePost(postId);
+            postRepository.deletePost(post);
         else throw new IllegalAccessException("게시물 작성자만 삭제가 가능합니다.");
     }
 

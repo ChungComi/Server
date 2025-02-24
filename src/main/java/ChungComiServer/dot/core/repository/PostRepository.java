@@ -56,10 +56,7 @@ public class PostRepository {
         return post.getId();
     }
 
-    public void deletePost(Long postId) {
-        em.createQuery("delete from Post p where p.id =: postId")
-                .setParameter("postId",postId)
-                .executeUpdate();
-        em.clear();
+    public void deletePost(Post post) {
+        em.remove(post);
     }
 }

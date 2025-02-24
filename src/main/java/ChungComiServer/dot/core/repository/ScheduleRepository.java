@@ -33,11 +33,8 @@ public class ScheduleRepository {
         return em.find(Schedule.class,scheduleId);
     }
 
-    public void deleteSchedule(Long scheduleId) {
-        em.createQuery("delete from Schedule s where s.id=:scheduleId")
-                .setParameter("scheduleId",scheduleId)
-                .executeUpdate();
-        em.clear();
+    public void deleteSchedule(Schedule schedule) {
+        em.remove(schedule);
     }
 
     public List<Schedule> findByDate(Long userId, LocalDateTime date) {
