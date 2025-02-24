@@ -1,5 +1,6 @@
 package ChungComiServer.dot.api.controller;
 
+import ChungComiServer.dot.api.service.CommentAPIService;
 import ChungComiServer.dot.core.service.PostService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
@@ -16,13 +17,24 @@ public class CommentAPIController {
 
     private final UserContext userContext;
     private final PostService postService;
+    private final CommentAPIService commentService;
 
     @PostMapping("/{postId}")
     public Response registerComments(@PathVariable Long postId, @RequestBody String content) {
         try {
             postService.registerComment(userContext.getUserId(), postId, content);
             return Response.success();
-        } catch (Exception e){
+        } catch (Exception e) {
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @PostMapping("/{commentId}")
+    public Response registerChildComments(@PathVariable Long commentId, @RequestBody String content) {
+        try {
+            commentService.registerChildComment(userContext.getUserId(), commentId, content);
+            return Response.success();
+        } catch (Exception e) {
             return Response.failure(new ErrorCode(e.getMessage()));
         }
     }
