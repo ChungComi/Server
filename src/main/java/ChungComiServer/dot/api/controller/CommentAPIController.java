@@ -7,6 +7,7 @@ import ChungComiServer.dot.global.response.Response;
 import ChungComiServer.dot.global.security.UserContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,6 +34,16 @@ public class CommentAPIController {
     public Response registerChildComments(@PathVariable Long commentId, @RequestBody String content) {
         try {
             commentService.registerChildComment(userContext.getUserId(), commentId, content);
+            return Response.success();
+        } catch (Exception e) {
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @PostMapping("/like/{commentId}")
+    public Response likeComment(@PathVariable Long commentId){
+        try {
+            commentService.likeComment(commentId);
             return Response.success();
         } catch (Exception e) {
             return Response.failure(new ErrorCode(e.getMessage()));

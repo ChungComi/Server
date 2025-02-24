@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Slf4j
 public class CommentAPIService {
@@ -19,6 +19,7 @@ public class CommentAPIService {
     private final MemberRepository memberRepository;
     private final CommentAPIRepository commentRepository;
 
+    @Transactional
     public void registerChildComment(Long userId, Long commentId, String content) {
         Member member = memberRepository.findById(userId);
         Comment comment = commentRepository.findById(commentId);
@@ -27,4 +28,9 @@ public class CommentAPIService {
         comment.addChildComment(childComment);
     }
 
+    @Transactional
+    public void likeComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId);
+        comment.plusLike();
+    }
 }
