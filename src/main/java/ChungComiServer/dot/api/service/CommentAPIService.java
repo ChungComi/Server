@@ -38,7 +38,7 @@ public class CommentAPIService {
     public void deleteComment(Long userId, Long commentId) throws IllegalAccessException {
         Comment comment = commentRepository.findById(commentId);
         comment.verifyAuthorization(userId);
-        commentRepository.deleteComment(commentId);
+        commentRepository.deleteComment(comment);
     }
 
     @Transactional
