@@ -20,11 +20,12 @@ public class CommentDTO {
         this.memberName = comment.getMember().getName();
         this.content = comment.getContent();
         this.likes = comment.getLikes();
-        List<CommentDTO> children = comment.getChild().stream().map(child -> new CommentDTO(child.getContent(), child.getLikes())).toList();
+        List<CommentDTO> children = comment.getChild().stream().map(child -> new CommentDTO(child.getId(),child.getContent(), child.getLikes())).toList();
         childrenComments = children;
     }
 
-    public CommentDTO(String content, Long likes){
+    public CommentDTO(Long id, String content, Long likes){
+        this.id = id;
         this.content = content;
         this.likes = likes;
     }
