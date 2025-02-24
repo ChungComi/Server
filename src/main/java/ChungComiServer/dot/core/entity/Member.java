@@ -31,6 +31,9 @@ public class Member extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<Post> posts;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+    List<Comment> comments;
+
     @BatchSize(size = 10)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<MemberCompany> memberCompanies = new ArrayList<>();

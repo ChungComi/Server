@@ -1,7 +1,6 @@
 package ChungComiServer.dot.core.entity;
 
 import ChungComiServer.dot.core.entity.interest.Company;
-import ChungComiServer.dot.core.entity.interest.Interest;
 import ChungComiServer.dot.core.entity.interest.TechStack;
 import ChungComiServer.dot.global.BaseEntity;
 import jakarta.persistence.*;
@@ -26,6 +25,10 @@ public class Comment extends BaseEntity {
     private Long likes;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POST_ID")
     private Post post;
 
@@ -43,4 +46,21 @@ public class Comment extends BaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
     private List<Comment> child = new ArrayList<>();
+
+
+    public Comment(){}
+
+    // == 게시글에 새로운 댓글 추가할 때 사용할 메서드 == //
+    public Comment(String content){
+        this.content = content;
+    }
+
+    // == 연관관계 편의 메서드 == //
+    public void addRelationship(Post post,Member member){
+        this.post = post;
+        post.getComments().add(this);
+        this.member = member;
+        member.getComments().add(this);
+    }
+
 }
