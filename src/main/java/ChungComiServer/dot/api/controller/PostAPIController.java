@@ -29,7 +29,7 @@ public class PostAPIController {
     @GetMapping("")
     public Response getAllPostsNum(){
         try{
-            Integer postsNum = postService.findAllPostsNum();
+            Long postsNum = postService.findAllPostsNum();
             return Response.success(postsNum);
         } catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));

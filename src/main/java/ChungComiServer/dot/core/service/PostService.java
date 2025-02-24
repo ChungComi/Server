@@ -65,7 +65,7 @@ public class PostService {
         return posts.stream().map(ResponsePostDTOForBoard::new).toList();
     }
 
-    public Integer findAllPostsNum(){
+    public Long findAllPostsNum(){
         return postRepository.findALlWithoutCommentsPosts();
     }
 

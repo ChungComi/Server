@@ -21,8 +21,8 @@ public class PostRepository {
                 .getResultList();
     }
 
-    public Integer findALlWithoutCommentsPosts(){
-        return em.createQuery("select count(p) from Post p", Integer.class)
+    public Long findALlWithoutCommentsPosts(){
+        return em.createQuery("select count(p) from Post p", Long.class)
                 .getSingleResult();
     }
 
