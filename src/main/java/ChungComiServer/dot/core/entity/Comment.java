@@ -52,6 +52,7 @@ public class Comment extends BaseEntity {
 
     // == 게시글에 새로운 댓글 추가할 때 사용할 메서드 == //
     public Comment(String content){
+        this.likes=0L;
         this.content = content;
     }
 
@@ -71,6 +72,10 @@ public class Comment extends BaseEntity {
     public void addChildComment(Comment childComment){
         childComment.parent = this;
         this.child.add(childComment);
+    }
+
+    public void plusLike(){
+        this.likes++;
     }
 
 }

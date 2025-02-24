@@ -50,6 +50,7 @@ public class Post extends BaseEntity {
         validateContent(content);
         this.title = title;
         this.content = content;
+        this.likes = 0L;
         this.registerDate = LocalDateTime.now();
     }
 
