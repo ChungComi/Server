@@ -50,6 +50,11 @@ public class Comment extends BaseEntity {
 
     public Comment(){}
 
+    public void verifyAuthorization(Long userId) throws IllegalAccessException {
+        if(!this.member.getId().equals(userId))
+            throw new IllegalAccessException("댓글 수정, 삭제에 권한이 없습니다.");
+    }
+
     // == 게시글에 새로운 댓글 추가할 때 사용할 메서드 == //
     public Comment(String content){
         this.likes=0L;
