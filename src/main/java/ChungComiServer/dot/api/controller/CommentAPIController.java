@@ -1,0 +1,30 @@
+package ChungComiServer.dot.api.controller;
+
+import ChungComiServer.dot.core.service.PostService;
+import ChungComiServer.dot.global.response.ErrorCode;
+import ChungComiServer.dot.global.response.Response;
+import ChungComiServer.dot.global.security.UserContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@Slf4j
+@RequiredArgsConstructor
+@RequestMapping("/api/comment")
+public class CommentAPIController {
+
+    private final UserContext userContext;
+    private final PostService postService;
+
+    @PostMapping("/{postId}")
+    public Response registerComments(@PathVariable Long postId, @RequestBody String content) {
+        try {
+            postService.registerComment(userContext.getUserId(), postId, content);
+            return Response.success();
+        } catch (Exception e){
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+}
