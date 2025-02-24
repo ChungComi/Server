@@ -1,6 +1,7 @@
 package ChungComiServer.dot.api.controller;
 
 import ChungComiServer.dot.api.service.CommentAPIService;
+import ChungComiServer.dot.core.entity.Comment;
 import ChungComiServer.dot.core.service.PostService;
 import ChungComiServer.dot.global.response.ErrorCode;
 import ChungComiServer.dot.global.response.Response;
@@ -55,6 +56,16 @@ public class CommentAPIController {
         try {
             commentService.deleteComment(userContext.getUserId(),commentId);
             return Response.success();
+        } catch (Exception e) {
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
+    @PutMapping("/{commentId}")
+    public Response modifyComment(@PathVariable Long commentId, String content){
+        try{
+            Comment comment = commentService.modifyComment(userContext.getUserId(), commentId, content);
+            return Response.success(comment);
         } catch (Exception e) {
             return Response.failure(new ErrorCode(e.getMessage()));
         }
