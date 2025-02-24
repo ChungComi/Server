@@ -50,4 +50,14 @@ public class CommentAPIController {
         }
     }
 
+    @DeleteMapping("/{commentId}")
+    public Response deleteComment(@PathVariable Long commentId){
+        try {
+            commentService.deleteComment(userContext.getUserId(),commentId);
+            return Response.success();
+        } catch (Exception e) {
+            return Response.failure(new ErrorCode(e.getMessage()));
+        }
+    }
+
 }

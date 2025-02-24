@@ -18,4 +18,10 @@ public class CommentAPIRepository {
                 .setParameter("commentId",commentId)
                 .getSingleResult();
     }
+
+    public void deleteComment(Long commentId) {
+        em.createQuery("delete from Comment c where c.id =: commentId")
+                .setParameter("commentId",commentId);
+        em.clear();
+    }
 }
