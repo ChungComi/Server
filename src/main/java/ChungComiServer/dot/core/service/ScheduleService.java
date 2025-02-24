@@ -25,9 +25,8 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final MemberRepository memberRepository;
 
-    public List<LocalDateTime> getAllSchedulesOfTheMonth(Long userId, Month month) {
-        int ordinalMonth = month.getMonthNumber();
-        return scheduleRepository.getAllSchedulesOfTheMonth(userId, ordinalMonth);
+    public List<LocalDateTime> getAllSchedulesOfTheMonth(Long userId, int year, int month) {
+        return scheduleRepository.getAllSchedulesOfTheMonth(userId, year, month);
     }
 
     @Transactional(readOnly = false)

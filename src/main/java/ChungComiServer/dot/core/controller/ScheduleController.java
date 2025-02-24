@@ -26,10 +26,10 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
     private final UserContext userContext;
 
-    @GetMapping("/{month}")
-    public Response getAllSchedulesOfTheMonth(@PathVariable("month") Month month){
+    @GetMapping("/{year}/{month}")
+    public Response getAllSchedulesOfTheMonth(@PathVariable("year")int year, @PathVariable("month")int month){
         try{
-            List<LocalDateTime> schedulesDates = scheduleService.getAllSchedulesOfTheMonth(userContext.getUserId(), month);
+            List<LocalDateTime> schedulesDates = scheduleService.getAllSchedulesOfTheMonth(userContext.getUserId(), year, month);
             return Response.success(schedulesDates);
         } catch (Exception e){
             return Response.failure(new ErrorCode(e.getMessage()));
