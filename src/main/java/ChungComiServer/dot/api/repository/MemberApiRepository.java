@@ -2,6 +2,7 @@ package ChungComiServer.dot.api.repository;
 
 import ChungComiServer.dot.core.entity.MemberCompany;
 import ChungComiServer.dot.core.entity.MemberTechStack;
+import ChungComiServer.dot.core.entity.interest.TechStack;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,19 +29,25 @@ public class MemberApiRepository {
         return memberCompany.getId();
     }
 
-    public void deleteMemberCompanyByName(Long userId, String companyName){
-        em.createQuery("delete from MemberCompany mc where mc.member.id =:userId and mc.company.name=: companyName")
-                .setParameter("userId",userId)
-                .setParameter("companyName",companyName)
-                .executeUpdate();
-        em.clear();
+    public void deleteMemberCompany(MemberCompany memberCompany){
+        em.remove(memberCompany);
     }
 
-    public void deleteMemberTechStackByName(Long userId, String techStackName){
-        em.createQuery("delete from MemberTechStack mt where mt.member.id =: userId and mt.techStack.name =: techStackName")
+    public void deleteMemberTechStackByName(MemberTechStack techStack){
+        em.remove(techStack);
+    }
+
+    public MemberCompany findMemberCompanyByCompanyName(Long userId, String companyName) {
+        return em.createQuery("select mc from MemberCompany mc where mc.company.name =: companyName and mc.member.id =: userId",MemberCompany.class)
+                .setParameter("companyName",companyName)
                 .setParameter("userId",userId)
-                .setParameter("techStackName", techStackName)
-                .executeUpdate();
-        em.clear();
+                .getSingleResult();
+    }
+
+    public MemberTechStack findMemberTechStackByName(Long userId, String techStackName) {
+        return em.createQuery("select mt from MemberTechStack mt where mt.techStack.name =: techStackName and mt.member.id =: userId", MemberTechStack.class)
+                .setParameter("techStackName",techStackName)
+                .setParameter("userId",userId)
+                .getSingleResult();
     }
 }

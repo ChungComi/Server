@@ -58,12 +58,14 @@ public class MemberApiService {
 
     @Transactional
     public void deleteMemberCompanyByName(Long userId, String companyName) {
-        memberApiRepository.deleteMemberCompanyByName(userId, companyName);
+        MemberCompany memberCompany = memberApiRepository.findMemberCompanyByCompanyName(userId,companyName);
+        memberApiRepository.deleteMemberCompany(memberCompany);
     }
 
     @Transactional
     public void deleteMemberTechStackByName(Long userId, String techStackName){
-        memberApiRepository.deleteMemberTechStackByName(userId,techStackName);
+        MemberTechStack techStack = memberApiRepository.findMemberTechStackByName(userId,techStackName);
+        memberApiRepository.deleteMemberTechStackByName(techStack);
     }
 
 

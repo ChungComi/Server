@@ -16,15 +16,15 @@ public class UserContext {
 
     private Long userId;
 
-    @PostConstruct
-    private void init(){
-        log.info("웹 스코프 빈 생성");
-    }
+//    @PostConstruct
+//    private void init(){
+//        log.info("웹 스코프 빈 생성");
+//    }
 
-    @PreDestroy
-    private void destroy(){
-        log.info("웹 스코프 빈 삭제");
-    }
+//    @PreDestroy
+//    private void destroy(){
+//        log.info("웹 스코프 빈 삭제");
+//    }
 
     public void saveUserIdAtInterceptor(String userId){
         this.userId =Long.valueOf(userId);

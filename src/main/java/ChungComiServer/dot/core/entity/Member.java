@@ -4,6 +4,7 @@ import ChungComiServer.dot.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
@@ -30,9 +31,14 @@ public class Member extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<Post> posts;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+    List<Comment> comments;
+
+    @BatchSize(size = 10)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<MemberCompany> memberCompanies = new ArrayList<>();
 
+    @BatchSize(size = 10)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     List<MemberTechStack> memberTechStacks = new ArrayList<>();
 

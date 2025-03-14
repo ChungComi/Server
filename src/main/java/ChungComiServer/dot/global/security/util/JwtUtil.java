@@ -40,7 +40,7 @@ public class JwtUtil {
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
-            log.info("Token successfully validated, token's subject: {}", claims.getSubject());
+//            log.info("Token successfully validated, token's subject: {}", claims.getSubject());
             return claims.getSubject();
         }catch (JwtException | IllegalArgumentException e){
             throw new SecurityException("Invalid JWT token",e);

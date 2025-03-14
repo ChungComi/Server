@@ -23,7 +23,7 @@ import java.util.Map;
 @Transactional
 public class NewsService {
 
-    private static final String API_KEY = "41d2aa8433f65aebab48a03f43ddd467df634de09376c3ddb9d41fd3f6795672";
+    private static final String API_KEY = "98711ebabe53ab4a92e0ae0475f02dec48c498ba3944d87628e429b30658f0f7";
     private static final String BASE_URL = "https://serpapi.com/search.json";
     private final RestTemplate restTemplate;
     private final MemberRepository memberRepository;

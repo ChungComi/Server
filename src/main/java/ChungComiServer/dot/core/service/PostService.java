@@ -2,10 +2,12 @@ package ChungComiServer.dot.core.service;
 
 import ChungComiServer.dot.api.dto.ResponsePostDTOForBoard;
 import ChungComiServer.dot.core.dto.post.ResponsePostDTO;
+import ChungComiServer.dot.core.entity.Comment;
 import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.entity.Post;
 import ChungComiServer.dot.core.repository.MemberRepository;
 import ChungComiServer.dot.core.repository.PostRepository;
+import ChungComiServer.dot.global.security.Config;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final Config config;
 
     public List<ResponsePostDTO> findAll() {
         List<Post> posts = postRepository.findAll();
@@ -65,8 +68,8 @@ public class PostService {
         return posts.stream().map(ResponsePostDTOForBoard::new).toList();
     }
 
-    public Integer findAllPostsNum(){
-        return postRepository.findALlWithoutCommentsPosts().size();
+    public Long findAllPostsNum(){
+        return postRepository.findAllPostsNum();
     }
 
     @Transactional(readOnly = false)
@@ -90,8 +93,16 @@ public class PostService {
         Long postId = Long.valueOf(stringPostId);
         Post post = postRepository.findById(postId);
         if(post.getMember().getId().equals(userId))
-            postRepository.deletePost(postId);
+            postRepository.deletePost(post);
         else throw new IllegalAccessException("게시물 작성자만 삭제가 가능합니다.");
+    }
+
+    @Transactional
+    public void registerComment(Long userId, Long postId, String content){
+        Post post = postRepository.findById(postId);
+        Member member = memberRepository.findById(userId);
+        Comment comment = new Comment(content);
+        comment.addRelationship(post,member);
     }
 
     private static Integer getFirstPostNum(String stringPageNum) {

@@ -4,6 +4,7 @@ import ChungComiServer.dot.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,7 +30,8 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @BatchSize(size = 5)
     private List<Comment> comments = new ArrayList<>();
 
     @Column(name = "LIKES")
@@ -48,6 +50,7 @@ public class Post extends BaseEntity {
         validateContent(content);
         this.title = title;
         this.content = content;
+        this.likes = 0L;
         this.registerDate = LocalDateTime.now();
     }
 

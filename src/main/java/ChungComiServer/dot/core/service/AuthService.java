@@ -1,9 +1,11 @@
 package ChungComiServer.dot.core.service;
 
+import ChungComiServer.dot.core.dto.auth.LoginResponseDTO;
 import ChungComiServer.dot.core.entity.Member;
 import ChungComiServer.dot.core.repository.MemberRepository;
 import ChungComiServer.dot.global.security.util.PasswordUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,9 +21,9 @@ public class AuthService {
 
 
     public Long login(String loginID, String loginPW) {
-        Member member = memberRepository.findByLoginId(loginID);
-        if(member != null && passwordUtil.matches(member.getLoginPw(),loginPW)){
-            return member.getId();
+        LoginResponseDTO loginResponse = memberRepository.findByLoginId(loginID);
+        if(passwordUtil.matches(loginResponse.getLoginPw(),loginPW)){
+            return loginResponse.getMemberId();
         }
         return null;
     }

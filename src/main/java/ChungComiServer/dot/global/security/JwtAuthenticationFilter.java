@@ -23,14 +23,14 @@ public class JwtAuthenticationFilter implements Filter {
             //인증하지 않아도 사용 가능한 경로 처리하기
             String requestURI = request.getRequestURI();
             if(isNoNeedAuth(requestURI)){
-                log.info("로그인 필터 인증 안해도 되면 호출되는 부분 uri={}",requestURI);
+//                log.info("로그인 필터 인증 안해도 되면 호출되는 부분 uri={}",requestURI);
                 filterChain.doFilter(request,response);
                 return;
             }
 
             //인증해야 사용 가능한 경로 처리하기
             String token = request.getHeader("Authorization");
-            log.info("로그인 필터 인증 해야되면 호출되는 부분 uri ={}, token ={}",requestURI,token);
+//            log.info("로그인 필터 인증 해야되면 호출되는 부분 uri ={}, token ={}",requestURI,token);
             if(token != null && !token.isEmpty()){
                 try{
                     String tokenSubject = jwtUtil.validateToken(token.replace("Bearer ",""));
@@ -40,13 +40,13 @@ public class JwtAuthenticationFilter implements Filter {
                     response.getWriter().write("유효하지 않거나 만료된 토큰입니다.");
                 }
             }
-            log.info("request.getAttribute('tokenSubject')={}",request.getAttribute("tokenSubject"));
+//            log.info("request.getAttribute('tokenSubject')={}",request.getAttribute("tokenSubject"));
             filterChain.doFilter(request,response);
         }
     }
 
     private boolean isNoNeedAuth(String requestURI) {
-        log.info("isNoNeedAuth method");
+//        log.info("isNoNeedAuth method");
         return requestURI.startsWith("/auth") || requestURI.equals("/index.html") || requestURI.equals("/")
                 ||requestURI.startsWith("/company") ||requestURI.startsWith("/tech-stack");
     }

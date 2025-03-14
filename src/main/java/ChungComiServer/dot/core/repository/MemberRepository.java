@@ -1,5 +1,6 @@
 package ChungComiServer.dot.core.repository;
 
+import ChungComiServer.dot.core.dto.auth.LoginResponseDTO;
 import ChungComiServer.dot.core.entity.Member;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,8 @@ public class MemberRepository {
     private final EntityManager em;
 
     /** 회원 ID로 DB에서 찾는 메서드 **/
-    public Member findByLoginId(String loginID) {
-        return em.createQuery("select m from Member m where m.loginId = :loginId", Member.class)
+    public LoginResponseDTO findByLoginId(String loginID) {
+        return em.createQuery("select new ChungComiServer.dot.core.dto.auth.LoginResponseDTO(m.id,m.loginPw) from Member m where m.loginId = :loginId", LoginResponseDTO.class)
                 .setParameter("loginId", loginID)
                 .getSingleResult();
     }
@@ -38,7 +39,9 @@ public class MemberRepository {
     /** @Param: 회원 ID
      * @Return: 회원 객체 **/
     public Member findById(Long memberId) {
-        return em.find(Member.class,memberId);
+        return em.createQuery("select m from Member m left join fetch m.school where m.id =:memberId",Member.class)
+                .setParameter("memberId",memberId)
+                .getSingleResult();
     }
 
     /** @Param: 회원 이름

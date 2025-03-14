@@ -25,10 +25,8 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final MemberRepository memberRepository;
 
-    public List<ResponseScheduleDTO> getAllSchedulesOfTheMonth(Long userId, Month month) {
-        int ordinalMonth = month.getMonthNumber();
-        List<Schedule> schedules = scheduleRepository.getAllSchedulesOfTheMonth(userId, ordinalMonth);
-        return schedules.stream().map(ResponseScheduleDTO::new).toList();
+    public List<LocalDateTime> getAllSchedulesOfTheMonth(Long userId, int year, int month) {
+        return scheduleRepository.getAllSchedulesOfTheMonth(userId, year, month);
     }
 
     @Transactional(readOnly = false)
@@ -53,7 +51,7 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(scheduleId);
         if(!schedule.getMember().getId().equals(userId))
             throw new IllegalAccessException("일정 작성자만 삭제 가능합니다.");
-        scheduleRepository.deleteSchedule(scheduleId);
+        scheduleRepository.deleteSchedule(schedule);
     }
 
     public List<ResponseIdScheduleDTO> getSchedulesOfTheDate(Long userId, LocalDateTime date) {

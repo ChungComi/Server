@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ResponseTimeTableDTO {
+    private Long id;
     private String className;
     private String professor;
     private DayOfWeek dayOfWeek;
@@ -18,6 +19,7 @@ public class ResponseTimeTableDTO {
     private LocalDateTime endTime;
 
     public ResponseTimeTableDTO(TimeTable timeTable) {
+        this.id = timeTable.getId();
         this.className = timeTable.getClassName();
         this.professor = timeTable.getProfessor();
         this.dayOfWeek = timeTable.getDayOfWeek();
