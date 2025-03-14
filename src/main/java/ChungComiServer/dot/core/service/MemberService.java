@@ -2,6 +2,8 @@ package ChungComiServer.dot.core.service;
 
 import ChungComiServer.dot.core.dto.member.ResponseMemberDTO;
 import ChungComiServer.dot.core.entity.Member;
+import ChungComiServer.dot.core.entity.MemberCompany;
+import ChungComiServer.dot.core.entity.MemberTechStack;
 import ChungComiServer.dot.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,10 +35,9 @@ public class MemberService {
     }
 
     public ResponseMemberDTO findById(Long memberId) {
-        Member foundMember = memberRepository.findById(memberId);
-        if(foundMember == null)
-            throw new NoSuchElementException("회원 존재 x");
-        return new ResponseMemberDTO(foundMember);
+        List<MemberCompany> memberCompanies = memberRepository.findMemberCompanyByMemberId(memberId);
+        List<MemberTechStack> memberTechStacks = memberRepository.findMemberTechStackByMemberId(memberId);
+        return new ResponseMemberDTO(memberCompanies,memberTechStacks);
     }
 
     public List<ResponseMemberDTO> findByName(String memberName) {
