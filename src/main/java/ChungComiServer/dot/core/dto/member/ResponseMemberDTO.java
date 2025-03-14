@@ -43,4 +43,20 @@ public class ResponseMemberDTO {
             this.school = new SchoolDTO(member.getSchool().getName());
         }
     }
+
+    public ResponseMemberDTO(List<MemberCompany> memberCompanies, List<MemberTechStack> memberTechStacks){
+        /** 반환할 선호 기업 DTO 설정 **/
+        if(!memberCompanies.isEmpty()){
+            this.memberCompanies = memberCompanies
+                    .stream().map(memberCompany -> new MemberCompanyDTO(memberCompany.getPreference(),memberCompany.getCompany().getName()))
+                    .toList();
+        }
+
+        /** 반환할 선호 기술스택 DTO 설정 **/
+        if(!memberTechStacks.isEmpty()){
+            this.memberTechStacks = memberTechStacks
+                    .stream().map(memberTechStack -> new MemberTechStackDTO(memberTechStack.getPreference(),memberTechStack.getTechStack().getName()))
+                    .toList();
+        }
+    }
 }

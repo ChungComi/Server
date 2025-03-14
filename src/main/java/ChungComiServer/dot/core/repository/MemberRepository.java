@@ -2,6 +2,8 @@ package ChungComiServer.dot.core.repository;
 
 import ChungComiServer.dot.core.dto.auth.LoginResponseDTO;
 import ChungComiServer.dot.core.entity.Member;
+import ChungComiServer.dot.core.entity.MemberCompany;
+import ChungComiServer.dot.core.entity.MemberTechStack;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,4 +56,15 @@ public class MemberRepository {
     }
 
 
+    public List<MemberCompany> findMemberCompanyByMemberId(Long memberId) {
+        return em.createQuery("select mc from MemberCompany mc left join mc.member where mc.member.id =: memberId", MemberCompany.class)
+                .setParameter("memberId",memberId)
+                .getResultList();
+    }
+
+    public List<MemberTechStack> findMemberTechStackByMemberId(Long memberId){
+        return em.createQuery("select mt from MemberTechStack mt left join mt.member where mt.member.id =: memberId", MemberTechStack.class)
+                .setParameter("memberId", memberId)
+                .getResultList();
+    }
 }
